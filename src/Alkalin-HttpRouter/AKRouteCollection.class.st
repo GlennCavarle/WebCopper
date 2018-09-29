@@ -134,6 +134,16 @@ AKRouteCollection >> clear [
 	routes removeAll.
 ]
 
+{ #category : #'gt-extension' }
+AKRouteCollection >> gtInspectorRoutesIn: composite [
+	<gtInspectorPresentationOrder: 0>  
+	
+	^(composite list)
+		title: ['Routes' translated];		 
+		display: [ routes ]; 
+		format: [:each | each printString ]
+]
+
 { #category : #initialization }
 AKRouteCollection >> initialize [
 	super initialize.
