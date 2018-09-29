@@ -37,12 +37,12 @@ BaselineOfAlkalin >> baseline: spec [
 			package: #'Alkalin-EventDispatcher-Tests' with: [ spec requires: #(#'Alkalin-EventDispatcher') ];
 			package: #'Alkalin-HttpRouter-Tests' with: [ spec requires: #(#'Alkalin-HttpRouter') ];
 			package: #'Alkalin-Di-Tests' with: [ spec requires: #(#'Alkalin-Di') ];
-			package: #'Alkalin-HttpServer-Tests' with: [ spec requires: #(#'Alkalin-HttpServer') ];
-			package: #'Alkalin-Mvc-Tests' with: [ spec requires: #(#'Alkalin-Mvc') ];
+			package: #'Alkalin-HttpServer-Tests' with: [ spec requires: #(#'Alkalin-HttpServer' #Apical) ];
+			package: #'Alkalin-Mvc-Tests' with: [ spec requires: #(#'Alkalin-Mvc' #Apical) ];
 			package: #'Alkalin-Ubiq-Tests' with: [ spec requires: #(#'Alkalin-Ubiq') ];
 			
 			"Examples"
-			package: #'AlkalinExample-TodoApp' with: [ spec requires: #(#'Alkalin-Mvc') ];
+			package: #'AlkalinExample-TodoApp' with: [ spec requires: #(#'Alkalin-Mvc' #Apical) ];
 			package: #'AlkalinExample-ComplexApp'  with: [ spec requires: #(#'Alkalin-Ubiq') ];
 			
 			"Extra"
