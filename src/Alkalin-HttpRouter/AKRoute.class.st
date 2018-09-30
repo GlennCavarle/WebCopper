@@ -3,9 +3,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'name',
-		'methods',
-		'compiledPath',
-		'action'
+		'action',
+		'requestMatcher'
 	],
 	#category : #'Alkalin-HttpRouter-Route'
 }
@@ -39,24 +38,19 @@ AKRoute >> action [
 	^ action
 ]
 
-{ #category : #private }
-AKRoute >> matchMethod: aMethodSymbol [
-	^ methods anySatisfy: [:each| each = aMethodSymbol]
-]
-
-{ #category : #private }
-AKRoute >> matchPath: aPathString [
-	^ compiledPath match: aPathString
+{ #category : #'accessing-parameters' }
+AKRoute >> extractUrlParametersFrom: aAKHttpRequest [
+	^ requestMatcher extractUrlValuesFrom: aAKHttpRequest
 ]
 
 { #category : #testing }
 AKRoute >> matchRequest: aRequest [
-	^ ( self matchMethod: aRequest method ) and: [ self matchPath: aRequest unprefixedPath ]
+	^ requestMatcher matchRequest: aRequest
 ]
 
 { #category : #accessing }
 AKRoute >> methods [
-	^ methods
+	^ requestMatcher methods
 ]
 
 { #category : #accessing }
@@ -67,19 +61,13 @@ AKRoute >> name [
 { #category : #initialization }
 AKRoute >> name: aSymbol methods: anArray path: aString constraints: aDictionary action: anAction [
 	name := aSymbol.
-	methods := anArray.
-	compiledPath := AKCompiledPath fromString:aString constraints: aDictionary.
+	requestMatcher := AKRequestMatcher methods: anArray path: aString constraints: aDictionary.
 	action := anAction.
 ]
 
 { #category : #accessing }
 AKRoute >> path [
-	^ compiledPath path
-]
-
-{ #category : #'accessing-parameters' }
-AKRoute >> pathParametersFrom: aAKHttpRequest [
-	^ compiledPath placeholderValuesFrom: aAKHttpRequest unprefixedPath.
+	^ requestMatcher path
 ]
 
 { #category : #printing }

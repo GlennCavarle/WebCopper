@@ -1,39 +1,39 @@
 Class {
-	#name : #AKCompiledPath,
-	#superclass : #Object,
+	#name : #AKUrlMatcher,
+	#superclass : #AKAbstractRequestMatcher,
 	#instVars : [
-		'path',
-		'pathRegex',
 		'placeholders',
-		'constraints'
+		'path',
+		'constraints',
+		'pathRegex'
 	],
-	#category : #'Alkalin-HttpRouter-Route'
+	#category : #'Alkalin-HttpRouter-Matcher'
 }
 
 { #category : #'instance creation' }
-AKCompiledPath class >> fromString: aString [
+AKUrlMatcher class >> fromString: aString [
 	^ self fromString: aString constraints: Dictionary new
 ]
 
 { #category : #'instance creation' }
-AKCompiledPath class >> fromString: aString constraints: aDictionary [
+AKUrlMatcher class >> fromString: aString constraints: aDictionary [
 	^ super new
 		initializeFromString: aString constraints: aDictionary
 		yourself
 ]
 
 { #category : #'instance creation' }
-AKCompiledPath class >> new [
+AKUrlMatcher class >> new [
 	self error: 'Use #fromString: or #fromString:constraints:'
 ]
 
 { #category : #private }
-AKCompiledPath >> atPlaceholder: aKey valueFrom: aPathString [
+AKUrlMatcher >> atPlaceholder: aKey valueFrom: aPathString [
 	^ (placeholders at: aKey) findValueIn: aPathString
 ]
 
 { #category : #private }
-AKCompiledPath >> buildPlaceholders [
+AKUrlMatcher >> buildPlaceholders [
 	| phRegex|
 	placeholders := Dictionary new.
 	phRegex := '\:(\w+)(\(([^/]+)\))?' asRegex.
@@ -50,7 +50,7 @@ AKCompiledPath >> buildPlaceholders [
 ]
 
 { #category : #private }
-AKCompiledPath >> buildRegex [
+AKUrlMatcher >> buildRegex [
 	| regexStr |
 	regexStr := path.
 	placeholders do: [ :each | regexStr := each copyReplaceByRegexIn: regexStr ].
@@ -58,17 +58,25 @@ AKCompiledPath >> buildRegex [
 ]
 
 { #category : #accessing }
-AKCompiledPath >> constraints [
+AKUrlMatcher >> constraints [
 	^ constraints
 ]
 
 { #category : #private }
-AKCompiledPath >> constraintsAt: aKey [
+AKUrlMatcher >> constraintsAt: aKey [
 	^ constraints at: aKey ifAbsentPut: [ AKPlaceholderConstraint any ]
 ]
 
+{ #category : #private }
+AKUrlMatcher >> extractValuesFrom: aAKHttpRequest [
+	<return: #Dictionary>
+	|aPathString|
+	aPathString := aAKHttpRequest unprefixedPath.
+	^ (placeholders collect: [ :each | each findValueIn: aPathString ])
+]
+
 { #category : #initialization }
-AKCompiledPath >> initializeFromString: aString constraints: aDictionary [
+AKUrlMatcher >> initializeFromString: aString constraints: aDictionary [
 	path := aString.
 	constraints := aDictionary.
 	self
@@ -77,29 +85,29 @@ AKCompiledPath >> initializeFromString: aString constraints: aDictionary [
 ]
 
 { #category : #testing }
-AKCompiledPath >> match: aPathString [
-	^  pathRegex matches: aPathString
+AKUrlMatcher >> matchRequest: anHttpRequest [
+	^  pathRegex matches:	anHttpRequest unprefixedPath
 ]
 
 { #category : #accessing }
-AKCompiledPath >> path [
+AKUrlMatcher >> path [
 	^ path
 ]
 
 { #category : #private }
-AKCompiledPath >> placeholderValuesFrom: aPathString [
+AKUrlMatcher >> placeholderValuesFrom: aPathString [
 	<return: #Dictionary>
 	
 	^ (placeholders collect: [ :each | each findValueIn: aPathString ])
 ]
 
 { #category : #accessing }
-AKCompiledPath >> placeholders [
+AKUrlMatcher >> placeholders [
 	^ placeholders
 ]
 
 { #category : #private }
-AKCompiledPath >> segmentPositionOf: aString [
+AKUrlMatcher >> segmentPositionOf: aString [
 	| strPosition stream position |
 	strPosition := path findString: aString.
 	stream := (path copyFrom:1  to: strPosition) readStream.
