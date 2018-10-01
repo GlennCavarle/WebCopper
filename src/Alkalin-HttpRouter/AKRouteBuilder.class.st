@@ -34,7 +34,7 @@ AKRouteBuilder >> buildRoute [
 ]
 
 { #category : #public }
-AKRouteBuilder >> call: aSymbol on: aReceiver [
+AKRouteBuilder >> callAction: aSymbol on: aReceiver [
 	self action: (AKCallAction call: aSymbol on: aReceiver)
 ]
 

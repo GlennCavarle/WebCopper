@@ -1,7 +1,7 @@
 Class {
 	#name : #AKHttpResponse,
 	#superclass : #ZnResponse,
-	#category : #'Alkalin-HttpServer-Message'
+	#category : #'Alkalin-HttpMessage-Response'
 }
 
 { #category : #accessing }

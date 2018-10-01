@@ -23,7 +23,7 @@ AKRequestMatcher >> extractUrlValuesFrom: anHttpRequest [
 { #category : #initialization }
 AKRequestMatcher >> initializeWithMethods: anArray path: aString constraints: aDictionary [
 	methodMatcher := AKMethodMatcher fromArray: anArray.
-	urlMatcher := AKUrlMatcher fromString: aString constraints: aDictionary
+	urlMatcher := AKUrlMatcher fromPathPattern: aString constraints: aDictionary
 ]
 
 { #category : #testing }

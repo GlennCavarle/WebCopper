@@ -7,7 +7,7 @@ Class {
 { #category : #asserting }
 AKUrlMatcherTest >> assertUrlMatcher: aPathPattern matches: aDictionary [
 	|matcher|
-	matcher := AKUrlMatcher fromString: aPathPattern.
+	matcher := AKUrlMatcher fromPathPattern: aPathPattern.
 	
 	aDictionary keysAndValuesDo: [ :k :v|
 		self assert: (matcher matchRequest: (AKHttpRequest get:k)).

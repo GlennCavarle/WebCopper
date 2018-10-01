@@ -1,7 +1,7 @@
 Class {
 	#name : #AKJsonResponse,
 	#superclass : #AKHttpResponse,
-	#category : #'Alkalin-HttpServer-Message'
+	#category : #'Alkalin-HttpMessage-Response'
 }
 
 { #category : #'as yet unclassified' }

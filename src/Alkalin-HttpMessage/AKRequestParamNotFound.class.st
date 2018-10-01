@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'parameter'
 	],
-	#category : #'Alkalin-HttpServer-Exception'
+	#category : #'Alkalin-HttpMessage-Exception'
 }
 
 { #category : #signalling }

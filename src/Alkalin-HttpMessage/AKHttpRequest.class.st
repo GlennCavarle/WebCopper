@@ -6,7 +6,7 @@ Class {
 		'matchedPrefixes',
 		'attributes'
 	],
-	#category : #'Alkalin-HttpServer-Message'
+	#category : #'Alkalin-HttpMessage-Request'
 }
 
 { #category : #operations }

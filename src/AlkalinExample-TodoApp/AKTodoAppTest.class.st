@@ -27,5 +27,13 @@ AKTodoAppTest >> test [
 	self assert: emptyListResponse isSuccess.
 	self assert: (NeoJSONReader fromString: emptyListResponse contents) isEmpty.
 	
+]
+
+{ #category : #tests }
+AKTodoAppTest >> testWithAuth [
+	| k noAuthResponse |
+	k := AKTodoAppConfig createKernel.
 	
+	noAuthResponse := k handleRequest: (AKJsonRequest get: '/admin').
+	self assert: noAuthResponse isAuthenticationRequired
 ]

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'fields'
 	],
-	#category : #'Alkalin-HttpServer-Message'
+	#category : #'Alkalin-HttpMessage-Entity'
 }
 
 { #category : #testing }

@@ -139,7 +139,7 @@ AKHttpServer >> stop [
 AKHttpServer >> withDefaultApp: aConfigurationBlock [
 	|app|
 	self assertIsNotRunning.
-	app := AKMvcKernel new.
+	app := AKKernel new.
 	aConfigurationBlock value: app.
 	self registerDefault: app
 ]

@@ -1,6 +1,6 @@
 Class {
 	#name : #AKComplexExampleApp,
-	#superclass : #AKMvcKernel,
+	#superclass : #AKKernel,
 	#category : #'AlkalinExample-ComplexApp-App'
 }
 

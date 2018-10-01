@@ -10,7 +10,7 @@ AKHttpServerTest >> test [
 	
 	server := AKMockHttpServer on
 		port: 8080;
-		at: '/api' register: (AKMvcKernel configure: [:k| 
+		at: '/api' register: (AKKernel configure: [:k| 
 					k router
 						prefix:'/v2';
 						GET:'/route/get' -> [ :req| AKHttpResponse accepted];
