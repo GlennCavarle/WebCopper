@@ -1,7 +1,7 @@
 Class {
 	#name : #AKHttpRequestTest,
 	#superclass : #TestCase,
-	#category : #'Alkalin-HttpServer-Tests'
+	#category : #'Alkalin-HttpMessage-Tests'
 }
 
 { #category : #tests }
