@@ -5,13 +5,13 @@ Class {
 		'id',
 		'text'
 	],
-	#category : #'AlkalinExample-TodoApp'
+	#category : #'AlkalinExample-TodoApp-Model'
 }
 
 { #category : #accessing }
 AKTodoComment class >> neoJsonMapping: mapper [
 	mapper for: self do: [ :mapping | 
-		(mapping mapInstVar: #id) valueSchema: UUID.
+		(mapping mapInstVar: #id) valueSchema: OID.
 		(mapping mapInstVar: #text).
 	]
 ]

@@ -12,8 +12,9 @@ AKAuthenticatorTest >> testBasic [
 		addUser: (AKUser username: 'John' password: 'password');
 		addUser: (AKUser username: 'Brenda' password: 'password').
 		
-	basicAuth := AKBasicAuthenticator new.
-	basicAuth userProviderManager: (AKUserProviderManager withProviders: {userProvider}).
+	basicAuth := AKBasicAuthenticator new
+			 			userProviderManager: (AKUserProviderManager withProviders: {userProvider});
+						yourself.
 	
 	map := AKAuthenticatorMap new
 		map: (AKUrlMatcher fromRegex: '^/admin.*') to: basicAuth;

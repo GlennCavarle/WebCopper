@@ -11,7 +11,7 @@ Class {
 AKTodoController >> doCreate: aRequest [
 	| newModel text |
 	text := aRequest bodyAt: #text.
-	newModel := AKTodo withId: UUID new text: text.
+	newModel := AKTodo withId: OID new text: text.
 	self repository add: newModel.
 	^ newModel
 ]
@@ -21,6 +21,14 @@ AKTodoController >> doDelete: aRequest [
 	|id|
 	id := (aRequest paramAt:#id).
 	self repository removeById: id.
+	
+	^ AKJsonResponse code: 200 data: { #message -> 'ok' } asDictionary
+]
+
+{ #category : #actions }
+AKTodoController >> doDeleteAll: aRequest [
+
+	self repository removeAll.
 	
 	^ AKJsonResponse code: 200 data: { #message -> 'ok' } asDictionary
 ]

@@ -6,8 +6,11 @@ Class {
 
 { #category : #tests }
 AKTodoAppTest >> test [
-	| k createResponse listResponse getOneResponse deleteResponse emptyListResponse id  |
+	| k deleteAllResponse createResponse listResponse getOneResponse deleteResponse emptyListResponse id  |
 	k := AKTodoAppConfig createKernel.
+	
+	deleteAllResponse := (k handleRequest: (AKJsonRequest delete:'/todos')).
+	self assert: deleteAllResponse isSuccess.
 	
 	createResponse := (k handleRequest: (AKJsonRequest 
 		post:'/todos' data:{#text -> 'doSomething'} asDictionary)).

@@ -6,21 +6,21 @@ Class {
 		'text',
 		'comments'
 	],
-	#category : #'AlkalinExample-TodoApp'
+	#category : #'AlkalinExample-TodoApp-Model'
 }
 
-{ #category : #accessing }
+{ #category : #'json mapping' }
 AKTodo class >> example1 [
 	^ (self withId: UUID new text: 'Do something')
 		addComment: (AKTodoComment withId: UUID new text: 'MyComment');
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : #'json mapping' }
 AKTodo class >> neoJsonMapping: mapper [
 	
 	mapper for: self do: [ :mapping |
-		(mapping mapInstVar: #id) valueSchema: UUID.
+		(mapping mapInstVar: #id) valueSchema: OID.
 		(mapping mapInstVar: #text).
 		(mapping mapInstVar: #comments) valueSchema: #'AKTodoComment[]' .
 		].

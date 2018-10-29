@@ -14,7 +14,7 @@ AKTodoAppConfig >> configureRouter: aRouter [
 			
 		addRoute: [ :rb | rb
 				name: #todo_get_one ;
-				method: #GET path: '/todos/:id(uuid)';
+				method: #GET path: '/todos/:id(any)';
 				callAction: #doGetOne: on: #TodoCtrl asAKServiceRef  ];
 			
 		addRoute: [ :rb | rb
@@ -24,8 +24,13 @@ AKTodoAppConfig >> configureRouter: aRouter [
 		
 		addRoute: [ :rb | rb
 				name: #todo_delete ;
-				method: #DELETE path: '/todos/:id(uuid)';
-				callAction: #doDelete: on: #TodoCtrl asAKServiceRef ]
+				method: #DELETE path: '/todos/:id(any)';
+				callAction: #doDelete: on: #TodoCtrl asAKServiceRef ];
+			
+	   addRoute: [ :rb | rb
+				name: #todo_delete_all ;
+				method: #DELETE path: '/todos';
+				callAction: #doDeleteAll: on: #TodoCtrl asAKServiceRef ]
 		
 ]
 
@@ -62,7 +67,20 @@ AKTodoAppConfig >> configureServiceContainer: container [
 			
 		addDefinition:[:def| def
 				identifier: #TodoRepo;
-				targetClass: AKTodoRepository ]
+				targetClass: AKTodoRepository;
+				constructor: #context: withArgs: {#DbContext asAKServiceRef} ];
+			
+		addDefinition:[:def| def
+				identifier: #DbContext;
+				targetClass: WRDbContext;
+				constructor: #metadataFactory:connection: withArgs: { 
+					WRClassMetadataFactory withAnnotationLoader.
+					#ConnectionPool asAKServiceRef}];
+				
+		addDefinition:[:def| def
+				identifier: #ConnectionPool;
+				targetClass: WRConnectionPool ;
+				constructor: #host:port: withArgs: { '172.17.0.2'. 27017} ]
 	
 ]
 
