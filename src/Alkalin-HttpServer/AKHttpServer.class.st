@@ -1,3 +1,9 @@
+"
+I am a web server (singleton) built around ZnServer.
+
+I use AKHttpRequest as the default request class. (using ZnServer>>reader:)
+I use AKHttpServerDispatcher as the default request handler (using ZnServer>>delegate: ).
+"
 Class {
 	#name : #AKHttpServer,
 	#superclass : #Object,
@@ -136,7 +142,7 @@ AKHttpServer >> stop [
 ]
 
 { #category : #options }
-AKHttpServer >> withDefaultApp: aConfigurationBlock [
+AKHttpServer >> withDefaultKernel: aConfigurationBlock [
 	|app|
 	self assertIsNotRunning.
 	app := AKKernel new.

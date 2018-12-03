@@ -1,3 +1,16 @@
+"
+I am a mock version of AKHttpServer.
+I am used to test request dispatching.
+
+example:
+
+server := AKMockHttpServer on
+	port: 8080;
+	""what ever""
+	start.
+
+server handleRequest: (AKHttpRequest get:'/test')
+"
 Class {
 	#name : #AKMockHttpServer,
 	#superclass : #AKHttpServer,

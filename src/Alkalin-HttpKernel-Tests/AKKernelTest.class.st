@@ -4,7 +4,7 @@ Class {
 	#category : #'Alkalin-HttpKernel-Tests'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #private }
 AKKernelTest >> createStoryOn: anApp [
 	^ ApcStory new
 		description: '';

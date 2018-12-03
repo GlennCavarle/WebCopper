@@ -1,3 +1,8 @@
+"
+I am the heart of the Alkalin system.
+I use dependency injection and event dispatching to orchestrate the request lifecycle.
+I can be configured using AKKernelConfig and extended by AKKernelExtension and AKKernelModule.
+"
 Class {
 	#name : #AKKernel,
 	#superclass : #Object,
