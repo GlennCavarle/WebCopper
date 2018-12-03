@@ -105,15 +105,15 @@ BaselineOfAlkalin >> groups: spec [
 
 	spec 
 		group: 'Core' with: #(
-			#'Alkalin-HttpKernel',
+			#'Alkalin-HttpKernel'
 			#'Alkalin-HttpServer');
 			
 		group: 'Tests' with: #(
-			#'Alkalin-EventDispatcher-Tests',
-			#'Alkalin-HttpRouter-Tests',
-			#'Alkalin-Di-Tests',
-			#'Alkalin-HttpServer-Tests',
-			#'Alkalin-HttpKernel-Tests',
+			#'Alkalin-EventDispatcher-Tests'
+			#'Alkalin-HttpRouter-Tests'
+			#'Alkalin-Di-Tests'
+			#'Alkalin-HttpServer-Tests'
+			#'Alkalin-HttpKernel-Tests'
 			#'Alkalin-Authentication-Tests');
 			
 		group: 'SecurityModule' with: #(
