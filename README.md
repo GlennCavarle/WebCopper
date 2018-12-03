@@ -1,4 +1,3 @@
 # Alkalin
 
-Alkalin in a REST-based web frameworks developed by Glenn Cavarle. 
-Check https://github.com/GlennCavarle/Alkalin
+Alkalin is a set of Pharo components and a web framework to create REST-based applications.
