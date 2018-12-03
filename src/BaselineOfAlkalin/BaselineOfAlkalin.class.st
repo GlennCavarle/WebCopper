@@ -81,7 +81,7 @@ BaselineOfAlkalin >> examplePackages: spec [
 	spec 
 		
 		"Examples"
-		package: #'AlkalinExample-TodoApp' with: [ spec requires: #(#'Alkalin-Mvc' #Apical) ]
+		package: #'AlkalinExample-TodoApp' with: [ spec requires: #(#'Alkalin-HttpKernel' #Apical) ]
 	
 ]
 
