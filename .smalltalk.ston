@@ -1,7 +1,7 @@
 SmalltalkCISpec {
   #loading : [
     SCIMetacelloLoadSpec {
-      #baseline : 'Alkaline',
+      #baseline : 'Alkalin',
       #load : [ 'Tests' ],
       #platforms : [ #pharo ]
     }
