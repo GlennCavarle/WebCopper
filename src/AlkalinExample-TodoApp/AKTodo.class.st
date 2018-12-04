@@ -20,7 +20,7 @@ AKTodo class >> example1 [
 AKTodo class >> neoJsonMapping: mapper [
 	
 	mapper for: self do: [ :mapping |
-		(mapping mapInstVar: #id) valueSchema: OID.
+		(mapping mapInstVar: #id) valueSchema: UUID.
 		(mapping mapInstVar: #text).
 		(mapping mapInstVar: #comments) valueSchema: #'AKTodoComment[]' .
 		].

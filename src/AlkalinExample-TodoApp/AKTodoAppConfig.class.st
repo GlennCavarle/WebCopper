@@ -1,7 +1,7 @@
 Class {
 	#name : #AKTodoAppConfig,
 	#superclass : #AKKernelConfig,
-	#category : #'AlkalinExample-TodoApp'
+	#category : #'AlkalinExample-TodoApp-App'
 }
 
 { #category : #configuring }
@@ -53,13 +53,6 @@ AKTodoAppConfig >> configureSecurity: aSecurityConfig [
 AKTodoAppConfig >> configureServiceContainer: container [
 		
 	container
-	
-		addDefinition:[:def| def
-				identifier: #ActionResolverSubscriber;
-				targetClass: AKActionResolverSubscriber;
-				constructor: #serviceContainer: withArgs: { #ServiceContainer asAKServiceRef };
-				tag: (AKDiTag name:#eventSubscriber)];
-			
 		addDefinition:[:def| def
 				identifier: #TodoCtrl;
 				targetClass: AKTodoController;
@@ -67,21 +60,18 @@ AKTodoAppConfig >> configureServiceContainer: container [
 			
 		addDefinition:[:def| def
 				identifier: #TodoRepo;
-				targetClass: AKTodoRepository;
-				constructor: #context: withArgs: {#DbContext asAKServiceRef} ];
-			
-		addDefinition:[:def| def
-				identifier: #DbContext;
-				targetClass: WRDbContext;
-				constructor: #metadataFactory:connection: withArgs: { 
-					WRClassMetadataFactory withAnnotationLoader.
-					#ConnectionPool asAKServiceRef}];
-				
-		addDefinition:[:def| def
-				identifier: #ConnectionPool;
-				targetClass: WRConnectionPool ;
-				constructor: #host:port: withArgs: { '172.17.0.2'. 27017} ]
+				targetClass: AKTodoRepository ]
+		
 	
+]
+
+{ #category : #accessing }
+AKTodoAppConfig >> extensions [
+	^ {
+		AKActionResolverExtension new.
+		AKRegisterTaggedListenersExtension new.
+		
+	}
 ]
 
 { #category : #accessing }

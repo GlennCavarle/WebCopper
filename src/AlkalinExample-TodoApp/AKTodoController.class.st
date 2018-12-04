@@ -4,14 +4,14 @@ Class {
 	#instVars : [
 		'repository'
 	],
-	#category : #'AlkalinExample-TodoApp'
+	#category : #'AlkalinExample-TodoApp-Controller'
 }
 
 { #category : #actions }
 AKTodoController >> doCreate: aRequest [
 	| newModel text |
 	text := aRequest bodyAt: #text.
-	newModel := AKTodo withId: OID new text: text.
+	newModel := AKTodo withId: UUID new text: text.
 	self repository add: newModel.
 	^ newModel
 ]
@@ -20,7 +20,7 @@ AKTodoController >> doCreate: aRequest [
 AKTodoController >> doDelete: aRequest [
 	|id|
 	id := (aRequest paramAt:#id).
-	self repository removeById: id.
+	self repository removeById: (UUID fromString:id).
 	
 	^ AKJsonResponse code: 200 data: { #message -> 'ok' } asDictionary
 ]
@@ -47,7 +47,7 @@ AKTodoController >> doGetOne: aRequest [
 	| id model |
 	
 	id := aRequest paramAt: #id.
-	model := self repository selectById: id.
+	model := self repository selectById: (UUID fromString:id).
 	
 	^ model
 ]
@@ -59,7 +59,7 @@ AKTodoController >> doUpdate: aRequest [
 	id := aRequest paramAt: #id.
 	data := aRequest body.
 	
-	model := self repository selectById: id.
+	model := self repository selectById: (UUID fromString: id).
 	model text: (data at:#text).
 		
 	^ model 

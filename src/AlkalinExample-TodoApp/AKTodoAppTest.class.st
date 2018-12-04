@@ -1,13 +1,13 @@
 Class {
 	#name : #AKTodoAppTest,
 	#superclass : #TestCase,
-	#category : #'AlkalinExample-TodoApp'
+	#category : #'AlkalinExample-TodoApp-App'
 }
 
 { #category : #tests }
 AKTodoAppTest >> test [
 	| k deleteAllResponse createResponse listResponse getOneResponse deleteResponse emptyListResponse id  |
-	k := AKTodoAppConfig createKernel.
+	k := AKTodoApp new.
 	
 	deleteAllResponse := (k handleRequest: (AKJsonRequest delete:'/todos')).
 	self assert: deleteAllResponse isSuccess.
@@ -35,7 +35,7 @@ AKTodoAppTest >> test [
 { #category : #tests }
 AKTodoAppTest >> testWithAuth [
 	| k noAuthResponse |
-	k := AKTodoAppConfig createKernel.
+	k := AKTodoApp new.
 	
 	noAuthResponse := k handleRequest: (AKJsonRequest get: '/admin').
 	self assert: noAuthResponse isAuthenticationRequired

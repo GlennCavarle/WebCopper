@@ -11,12 +11,12 @@ Class {
 { #category : #accessing }
 AKTodoComment class >> neoJsonMapping: mapper [
 	mapper for: self do: [ :mapping | 
-		(mapping mapInstVar: #id) valueSchema: OID.
+		(mapping mapInstVar: #id) valueSchema: UUID.
 		(mapping mapInstVar: #text).
 	]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 AKTodoComment class >> withId: anId text: aTodoText [
 	^ self new
 		id: anId;
