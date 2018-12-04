@@ -1,5 +1,16 @@
 # Todo App example
 
+## Setup
+
+```smalltalk
+
+Metacello new
+    baseline: 'Alkalin';
+    repository: 'github://GlennCavarle/Alkalin/src';
+    load: #('Core' 'SecurityModule').
+
+```
+
 ## App Struture
 
 * TodoApp
