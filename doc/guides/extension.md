@@ -10,8 +10,8 @@ Extensions used in your application must be enabled in your [kernel configuratio
 
 MyKernelConfig >> extensions
     ^ {
-        MyExtension.
-        MyOtherExtension.
+        MyExtension new.
+        MyOtherExtension new.
     }
 
 ```

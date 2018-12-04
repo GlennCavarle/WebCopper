@@ -9,8 +9,8 @@ Modules used in your application must be enabled in your [kernel configuration](
 
 MyKernelConfig >> modules
     ^ {
-        MyModule.
-        MyOtherModule.
+        MyModule new.
+        MyOtherModule new.
     }
 
 ```

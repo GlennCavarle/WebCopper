@@ -1,5 +1,10 @@
 # Getting Started
 
+* [Installation](#installation)
+* [Running your first dummy App](#running-your-first-dummy-app)
+* [A more real world example : The TodoApp](todoapp.md)
+
+
 ## Installation
 
 ```smalltalk
@@ -11,7 +16,7 @@ Metacello new
 
 ```
 
-## Running your first App
+## Running your first dummy App
 
 In Alkalin, there is a clear separation between your application and the server which serves it.  
  
