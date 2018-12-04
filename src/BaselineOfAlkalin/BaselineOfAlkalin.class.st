@@ -116,7 +116,7 @@ BaselineOfAlkalin >> groups: spec [
 			#'Alkalin-HttpKernel-Tests');
 		
 		group: 'Tests' with: #(
-			#'CoreTest'
+			#'CoreTests'
 			#'Alkalin-Authentication-Tests');
 			
 		group: 'SecurityModule' with: #(
