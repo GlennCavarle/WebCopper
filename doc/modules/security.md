@@ -8,7 +8,7 @@
 ```smalltalk
 MyKernelConfig >> modules
     ^ {
-        AKSecurityModule
+        AKSecurityModule new
     }
 ```
 
