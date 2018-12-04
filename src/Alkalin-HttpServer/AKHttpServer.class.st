@@ -123,7 +123,6 @@ AKHttpServer >> registerDefault: aAKRequestHandler [
 { #category : #control }
 AKHttpServer >> restart [
 	self stop.
-	self configure.
 	^ self start
 ]
 

@@ -1,3 +1,7 @@
+"
+Response from an authenticator.
+Contains an http response or/and a token
+"
 Class {
 	#name : #AKAuthResult,
 	#superclass : #Object,

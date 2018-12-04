@@ -1,3 +1,6 @@
+"
+Crafts an authentication token from an input request
+"
 Class {
 	#name : #AKAbstractAuthenticator,
 	#superclass : #Object,

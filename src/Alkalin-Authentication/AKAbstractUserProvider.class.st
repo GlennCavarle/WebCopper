@@ -1,3 +1,6 @@
+"
+Strategy to retrieve a User from a token
+"
 Class {
 	#name : #AKAbstractUserProvider,
 	#superclass : #Object,

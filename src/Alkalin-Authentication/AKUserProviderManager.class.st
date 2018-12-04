@@ -1,3 +1,6 @@
+"
+Manages several user providers
+"
 Class {
 	#name : #AKUserProviderManager,
 	#superclass : #Object,

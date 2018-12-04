@@ -12,8 +12,6 @@ rc := AKRouteCollection new.
 
 rc 
 	prefix:'/api';
-	
-	
 	GET:'/route/get' -> [ :req| "do something"];
 	
 	addRoute:[:rb| rb

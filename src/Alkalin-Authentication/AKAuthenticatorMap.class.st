@@ -1,3 +1,7 @@
+"
+Maps url patterns to authenticator.
+Defines routes which needs authentidaction.
+"
 Class {
 	#name : #AKAuthenticatorMap,
 	#superclass : #Object,

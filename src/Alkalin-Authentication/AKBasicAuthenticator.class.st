@@ -1,3 +1,6 @@
+"
+Crafts token from Basic Http headers
+"
 Class {
 	#name : #AKBasicAuthenticator,
 	#superclass : #AKAbstractAuthenticator,

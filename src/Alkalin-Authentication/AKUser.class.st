@@ -1,3 +1,6 @@
+"
+Base class for User management
+"
 Class {
 	#name : #AKUser,
 	#superclass : #Object,

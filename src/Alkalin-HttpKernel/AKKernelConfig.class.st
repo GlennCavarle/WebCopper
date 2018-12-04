@@ -47,9 +47,7 @@ AKKernelConfig >> configureServiceContainer: aAKServiceContainer [
 
 { #category : #accessing }
 AKKernelConfig >> extensions [
-	^ { 
-		AKRegisterTaggedListenersExtension new
-	 }
+	^ {}
 ]
 
 { #category : #accessing }
