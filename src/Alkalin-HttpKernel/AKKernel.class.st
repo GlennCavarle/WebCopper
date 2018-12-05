@@ -57,6 +57,11 @@ AKKernel >> configuration [
 	^ configuration ifNil: [ configuration := self class defaultConfiguration ]
 ]
 
+{ #category : #'public - accessing' }
+AKKernel >> configuration: anObject [
+	configuration := anObject
+]
+
 { #category : #'private - configuring' }
 AKKernel >> configure [
 	| config |
@@ -64,8 +69,8 @@ AKKernel >> configure [
 	
 	serviceContainer := self class defaultServiceContainer.
 	config := self configuration.
-	extensions := config extensions.
-	modules := config modules.
+	extensions addAll: config extensions.
+	modules addAll: config modules.
 	
 	"kernel internal configuration"
 	self configureServiceContainer.
@@ -139,6 +144,11 @@ AKKernel >> executeAction: aAKAction forRequest: aAKHttpRequest [
 	
 ]
 
+{ #category : #'public - accessing' }
+AKKernel >> extensions [
+	^ extensions
+]
+
 { #category : #'private - request handling' }
 AKKernel >> filterAction: aAKAction forRequest: aAKRequest [
 	<return: #AKAction>
@@ -191,6 +201,8 @@ AKKernel >> handleRequest: aAKHttpRequest [
 { #category : #initialization }
 AKKernel >> initialize [
 	super initialize.
+	extensions := SortedCollection sortBlock: [ :a :b| a class priority < b class priority ].
+	modules := SortedCollection sortBlock: [ :a :b| a class priority < b class priority ].
 	self configure
 ]
 
@@ -209,6 +221,11 @@ AKKernel >> loadExtensions [
 { #category : #'private - configuring' }
 AKKernel >> loadModules [
 	modules do: [ :each | each load: self serviceContainer config: self configuration ]
+]
+
+{ #category : #'public - accessing' }
+AKKernel >> modules [
+	^ modules
 ]
 
 { #category : #'private - request handling' }

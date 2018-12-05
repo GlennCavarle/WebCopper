@@ -10,6 +10,11 @@ Class {
 	#category : #'Alkalin-HttpKernel-Extension'
 }
 
+{ #category : #accessing }
+AKRegisterTaggedListenersExtension class >> priority [
+	^ 1000
+]
+
 { #category : #'as yet unclassified' }
 AKRegisterTaggedListenersExtension >> load: aDiContainer config: aConfiguration [
 	|eventDispatcher|

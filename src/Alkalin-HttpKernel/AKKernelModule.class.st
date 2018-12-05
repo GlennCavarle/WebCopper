@@ -18,6 +18,11 @@ AKKernelModule class >> defaultConfiguration [
 	^ AKKernelModuleConfig new
 ]
 
+{ #category : #configuring }
+AKKernelModule class >> priority [
+	^ 100
+]
+
 { #category : #accessing }
 AKKernelModule >> configuration [
 	^ configuration ifNil: [ configuration := self class defaultConfiguration ]

@@ -13,6 +13,11 @@ Class {
 	#category : #'Alkalin-HttpKernel-Extension'
 }
 
+{ #category : #configuring }
+AKKernelExtension class >> priority [
+	^ 100
+]
+
 { #category : #'as yet unclassified' }
 AKKernelExtension >> load: aDiContainer config: aConfiguration [
 	self subclassResponsibility
