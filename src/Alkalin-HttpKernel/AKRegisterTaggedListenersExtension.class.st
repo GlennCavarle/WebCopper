@@ -15,7 +15,7 @@ AKRegisterTaggedListenersExtension class >> priority [
 	^ 1000
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #loading }
 AKRegisterTaggedListenersExtension >> load: aDiContainer config: aConfiguration [
 	|eventDispatcher|
 	

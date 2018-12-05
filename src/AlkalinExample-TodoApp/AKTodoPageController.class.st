@@ -7,5 +7,7 @@ Class {
 { #category : #actions }
 AKTodoPageController >> doNotFound: aRequest [
 	
-	^ AKTodoNotFoundPage new
+	^ AKHtmlResponse 
+		code: 404 
+		data: (AKHtmlRenderer renderHtml: AKTodoNotFoundPage new)
 ]

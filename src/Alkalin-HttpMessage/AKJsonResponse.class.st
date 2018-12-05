@@ -4,7 +4,7 @@ Class {
 	#category : #'Alkalin-HttpMessage-Response'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 AKJsonResponse class >> code: anHttpCode data: aObject [
 	
 ^ self new

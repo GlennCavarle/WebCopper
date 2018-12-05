@@ -18,7 +18,7 @@ AKKernelExtension class >> priority [
 	^ 100
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #loading }
 AKKernelExtension >> load: aDiContainer config: aConfiguration [
 	self subclassResponsibility
 ]

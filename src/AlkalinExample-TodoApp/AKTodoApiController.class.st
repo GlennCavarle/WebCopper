@@ -13,7 +13,8 @@ AKTodoApiController >> doCreate: aRequest [
 	text := aRequest bodyAt: #text.
 	newModel := AKTodo withId: UUID new text: text.
 	self repository add: newModel.
-	^ newModel
+	
+	^ AKJsonResponse code: 200 data: newModel
 ]
 
 { #category : #actions }
@@ -39,7 +40,7 @@ AKTodoApiController >> doGetList: aRequest [
 	
 	list := self repository selectAll.
 	
-	^ list
+	^ AKJsonResponse code: 200 data: list
 ]
 
 { #category : #actions }
@@ -49,7 +50,7 @@ AKTodoApiController >> doGetOne: aRequest [
 	id := aRequest paramAt: #id.
 	model := self repository selectById: (UUID fromString:id).
 	
-	^ model
+	^ AKJsonResponse code: 200 data: model
 ]
 
 { #category : #actions }
@@ -62,7 +63,7 @@ AKTodoApiController >> doUpdate: aRequest [
 	model := self repository selectById: (UUID fromString: id).
 	model text: (data at:#text).
 		
-	^ model 
+	^ AKJsonResponse code: 200 data: model 
 ]
 
 { #category : #initialization }

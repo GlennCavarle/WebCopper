@@ -38,8 +38,8 @@ AKTodoAppTest >> testHtmlPage [
 	k := AKTodoApp new.
 	
 	resp := (k handleRequest: (AKHtmlRequest get:'/404')).
-	self assert: resp isSuccess.
-	self assert: resp contentType = ZnMimeType textHtml
+	self assert: resp isNotFound.
+	self assert: resp contentType equals: ZnMimeType textHtml
 	
 	
 ]

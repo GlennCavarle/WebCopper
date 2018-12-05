@@ -91,8 +91,7 @@ AKKernel >> configure [
 { #category : #'private - configuring' }
 AKKernel >> configureEventListeners [
 	self eventDispatcher
-		addSubscriber: (AKRouterSubscriber router: self router);
-		addSubscriber: AKResponseBuilderSubscriber new
+		addSubscriber: (AKRouterSubscriber router: self router)
 		
 ]
 

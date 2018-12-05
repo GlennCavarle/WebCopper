@@ -4,7 +4,7 @@ Class {
 	#category : #'Alkalin-HttpKernel-Extension'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #loading }
 AKActionResolverExtension >> load: aDiContainer config: aConfiguration [
 	
 	aDiContainer addDefinition:[:def| def
