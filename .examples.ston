@@ -3,7 +3,7 @@ SmalltalkCISpec {
     SCIMetacelloLoadSpec {
       #baseline : 'Alkalin',
       #directory : 'src',
-      #load : [ 'CoreTests', 'FeatureTests', 'ModuleTests' ],
+      #load : [ 'ExampleTests' ],
       #platforms : [ #pharo ]
     }
   ],
@@ -12,5 +12,5 @@ SmalltalkCISpec {
       #coverage : {
         #packages : [ 'Alkalin.*' ]
       }
-}
+  }
 }
