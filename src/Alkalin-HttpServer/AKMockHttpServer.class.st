@@ -19,7 +19,7 @@ Class {
 		'debugMode',
 		'port'
 	],
-	#category : #'Alkalin-HttpServer-Server'
+	#category : #'Alkalin-HttpServer-Testing'
 }
 
 { #category : #asserting }
