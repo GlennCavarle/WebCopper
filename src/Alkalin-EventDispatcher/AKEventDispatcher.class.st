@@ -39,6 +39,11 @@ AKEventDispatcher >> at: EventClass at: aPriority add: aListener [
 ]
 
 { #category : #'private accessing' }
+AKEventDispatcher >> at: EventClass at: aPriority anySatisfy: aBlock [
+	^ (self at: EventClass at: aPriority) anySatisfy: aBlock
+]
+
+{ #category : #'private accessing' }
 AKEventDispatcher >> at: EventClass at: aPriority remove: aListener [
 	
 	(self at: EventClass at: aPriority) remove: aListener.
@@ -64,6 +69,12 @@ AKEventDispatcher >> dispatch: anEvent [
 { #category : #testing }
 AKEventDispatcher >> hasListeners [
 	^ listeners isNotEmpty
+]
+
+{ #category : #testing }
+AKEventDispatcher >> hasSubscriber: aSubscriber [
+	^ aSubscriber subscriptions allSatisfy: [ :aSub | 
+		self at: aSub eventClass at: aSub priority anySatisfy: [ :each | each subscriber class = aSubscriber class ] ]
 ]
 
 { #category : #initialization }
