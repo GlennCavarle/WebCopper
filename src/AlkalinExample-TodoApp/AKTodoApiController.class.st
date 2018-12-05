@@ -1,5 +1,5 @@
 Class {
-	#name : #AKTodoController,
+	#name : #AKTodoApiController,
 	#superclass : #Object,
 	#instVars : [
 		'repository'
@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #actions }
-AKTodoController >> doCreate: aRequest [
+AKTodoApiController >> doCreate: aRequest [
 	| newModel text |
 	text := aRequest bodyAt: #text.
 	newModel := AKTodo withId: UUID new text: text.
@@ -17,7 +17,7 @@ AKTodoController >> doCreate: aRequest [
 ]
 
 { #category : #actions }
-AKTodoController >> doDelete: aRequest [
+AKTodoApiController >> doDelete: aRequest [
 	|id|
 	id := (aRequest paramAt:#id).
 	self repository removeById: (UUID fromString:id).
@@ -26,7 +26,7 @@ AKTodoController >> doDelete: aRequest [
 ]
 
 { #category : #actions }
-AKTodoController >> doDeleteAll: aRequest [
+AKTodoApiController >> doDeleteAll: aRequest [
 
 	self repository removeAll.
 	
@@ -34,7 +34,7 @@ AKTodoController >> doDeleteAll: aRequest [
 ]
 
 { #category : #actions }
-AKTodoController >> doGetList: aRequest [
+AKTodoApiController >> doGetList: aRequest [
 	| list |
 	
 	list := self repository selectAll.
@@ -43,7 +43,7 @@ AKTodoController >> doGetList: aRequest [
 ]
 
 { #category : #actions }
-AKTodoController >> doGetOne: aRequest [
+AKTodoApiController >> doGetOne: aRequest [
 	| id model |
 	
 	id := aRequest paramAt: #id.
@@ -53,7 +53,7 @@ AKTodoController >> doGetOne: aRequest [
 ]
 
 { #category : #actions }
-AKTodoController >> doUpdate: aRequest [
+AKTodoApiController >> doUpdate: aRequest [
 	|id data model |
 	
 	id := aRequest paramAt: #id.
@@ -66,17 +66,17 @@ AKTodoController >> doUpdate: aRequest [
 ]
 
 { #category : #initialization }
-AKTodoController >> initialize [
+AKTodoApiController >> initialize [
 	super initialize.
 	
 ]
 
 { #category : #accessing }
-AKTodoController >> repository [
+AKTodoApiController >> repository [
 	^ repository
 ]
 
 { #category : #accessing }
-AKTodoController >> repository: anObject [
+AKTodoApiController >> repository: anObject [
 	repository := anObject
 ]

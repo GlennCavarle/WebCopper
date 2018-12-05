@@ -7,6 +7,7 @@ Class {
 { #category : #configuring }
 AKTodoAppConfig >> configureRouter: aRouter [
 	aRouter
+						
 		addRoute: [ :rb | rb
 				name: #todo_get_list;
 				method: #GET path: '/todos';
@@ -30,7 +31,12 @@ AKTodoAppConfig >> configureRouter: aRouter [
 	   addRoute: [ :rb | rb
 				name: #todo_delete_all ;
 				method: #DELETE path: '/todos';
-				callAction: #doDeleteAll: on: #TodoCtrl asAKServiceRef ]
+				callAction: #doDeleteAll: on: #TodoCtrl asAKServiceRef ];
+		
+		addRoute: [ :rb | rb
+				name: #not_found;
+				method: #GET path: '/404';
+				callAction: #doNotFound: on: #PageCtrl asAKServiceRef ]
 		
 ]
 
@@ -54,8 +60,12 @@ AKTodoAppConfig >> configureServiceContainer: container [
 		
 	container
 		addDefinition:[:def| def
+				identifier: #PageCtrl;
+				targetClass: AKTodoPageController ];
+			
+		addDefinition:[:def| def
 				identifier: #TodoCtrl;
-				targetClass: AKTodoController;
+				targetClass: AKTodoApiController;
 				methodCall: #repository: withArgs: { #TodoRepo asAKServiceRef} ];
 			
 		addDefinition:[:def| def

@@ -33,6 +33,18 @@ AKTodoAppTest >> test [
 ]
 
 { #category : #tests }
+AKTodoAppTest >> testHtmlPage [
+	| k resp  |
+	k := AKTodoApp new.
+	
+	resp := (k handleRequest: (AKHtmlRequest get:'/404')).
+	self assert: resp isSuccess.
+	self assert: resp contentType = ZnMimeType textHtml
+	
+	
+]
+
+{ #category : #tests }
 AKTodoAppTest >> testWithAuth [
 	| k noAuthResponse |
 	k := AKTodoApp new.

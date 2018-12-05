@@ -84,7 +84,8 @@ BaselineOfAlkalin >> examplePackages: spec [
 	spec 
 		
 		"Examples"
-		package: #'AlkalinExample-TodoApp' with: [ spec requires: #(#'Alkalin-HttpKernel' #'AlkalinModule-Security' #Apical) ]
+		package: #'AlkalinExample-TodoApp' with: [ 
+			spec requires: #(#'Alkalin-HttpKernel' #'AlkalinModule-Security' 'Alkalin-Html' #Apical) ]
 	
 ]
 
@@ -93,11 +94,10 @@ BaselineOfAlkalin >> extraPackages: spec [
 	spec
 			
 		"Extra"
-		package: #'Alkalin-Html';
-		package: #'Alkalin-Refactoring';
+		package: #'Alkalin-Refactoring'
 		
 		"Tests"
-		package: #'Alkalin-Html-Tests' with: [ spec requires: #(#'Alkalin-Html') ]
+		
 		
 ]
 
@@ -107,9 +107,11 @@ BaselineOfAlkalin >> featurePackages: spec [
 	spec 
 	
 		"Feature packages"
+		package: #'Alkalin-Html';
 		package: #'Alkalin-Authentication' with: [ spec requires: #(#'Alkalin-HttpMessage') ];
 		
 		"Tests"
+		package: #'Alkalin-Html-Tests' with: [ spec requires: #(#'Alkalin-Html') ];
 		package: #'Alkalin-Authentication-Tests' with: [ spec requires: #(#'Alkalin-Authentication') ]
 		
 		
