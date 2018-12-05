@@ -1,6 +1,6 @@
 Extension { #name : #Object }
 
-{ #category : #'*Alkalin-HttpServer' }
+{ #category : #'*Alkalin-HttpMessage' }
 Object >> isHttpResponse [
 	^ false
 ]

@@ -82,10 +82,14 @@ BaselineOfAlkalin >> enventSourcingPackages: spec [
 BaselineOfAlkalin >> examplePackages: spec [
 	
 	spec 
-		
-		"Examples"
-		package: #'AlkalinExample-TodoApp' with: [ spec requires: #(#'Alkalin-HttpKernel' #'AlkalinModule-Security' #Apical) ]
 	
+		"Feature packages"
+		package: #'Alkalin-Authentication' with: [ spec requires: #(#'Alkalin-HttpMessage') ];
+		
+		"Tests"
+		package: #'Alkalin-Authentication-Tests' with: [ spec requires: #(#'Alkalin-Authentication') ]
+		
+		
 ]
 
 { #category : #packages }

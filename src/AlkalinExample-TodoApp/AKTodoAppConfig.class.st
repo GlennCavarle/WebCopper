@@ -70,7 +70,6 @@ AKTodoAppConfig >> extensions [
 	^ {
 		AKActionResolverExtension new.
 		AKRegisterTaggedListenersExtension new.
-		
 	}
 ]
 

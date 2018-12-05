@@ -1,6 +1,6 @@
 Extension { #name : #ZnApplicationFormUrlEncodedEntity }
 
-{ #category : #'*Alkalin-HttpServer' }
+{ #category : #'*Alkalin-HttpMessage' }
 ZnApplicationFormUrlEncodedEntity >> hasFields [
 	^ true
 ]

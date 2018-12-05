@@ -1,6 +1,6 @@
 Extension { #name : #ZnEntity }
 
-{ #category : #'*Alkalin-HttpServer' }
+{ #category : #'*Alkalin-HttpMessage' }
 ZnEntity >> hasFields [
 	^ false
 ]

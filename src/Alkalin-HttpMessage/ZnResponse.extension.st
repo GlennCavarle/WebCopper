@@ -1,6 +1,6 @@
 Extension { #name : #ZnResponse }
 
-{ #category : #'*Alkalin-HttpServer' }
+{ #category : #'*Alkalin-HttpMessage' }
 ZnResponse >> isHttpResponse [
 	^ true
 ]
