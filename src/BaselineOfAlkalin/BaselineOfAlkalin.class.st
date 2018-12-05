@@ -12,32 +12,6 @@ BaselineOfAlkalin >> apical: spec [
 		repository: 'github://GlennCavarle/Apical/src' ].
 ]
 
-{ #category : #packages }
-BaselineOfAlkalin >> basePackages: spec [
-	
-	spec 
-	
-		"Base packages"
-		package: #'Alkalin-Core';
-		package: #'Alkalin-EventDispatcher' with: [ spec requires: #(#'Alkalin-Core') ];
-		package: #'Alkalin-Di' with: [ spec requires: #(#'Alkalin-Core') ];
-		package: #'Alkalin-HttpMessage' with: [ spec requires: #(#'Alkalin-Core' #ZincHTTPComponents #NeoJSON) ];
-		package: #'Alkalin-HttpServer' with: [ spec requires: #(#'Alkalin-HttpMessage') ];
-		package: #'Alkalin-HttpRouter' with: [ spec requires: #(#'Alkalin-HttpMessage') ];
-		package: #'Alkalin-HttpKernel' with: [ spec requires: #(#'Alkalin-Di' #'Alkalin-EventDispatcher' #'Alkalin-HttpRouter') ];
-		package: #'Alkalin-Authentication' with: [ spec requires: #(#'Alkalin-HttpMessage') ];
-		
-		"Tests"
-		package: #'Alkalin-EventDispatcher-Tests' with: [ spec requires: #(#'Alkalin-EventDispatcher') ];
-		package: #'Alkalin-HttpRouter-Tests' with: [ spec requires: #(#'Alkalin-HttpRouter') ];
-		package: #'Alkalin-Di-Tests' with: [ spec requires: #(#'Alkalin-Di') ];
-		package: #'Alkalin-HttpServer-Tests' with: [ spec requires: #(#'Alkalin-HttpServer' #Apical) ];
-		package: #'Alkalin-HttpKernel-Tests' with: [ spec requires: #(#'Alkalin-HttpKernel' #Apical) ];
-		package: #'Alkalin-Authentication-Tests' with: [ spec requires: #(#'Alkalin-Authentication') ]
-		
-		
-]
-
 { #category : #baselines }
 BaselineOfAlkalin >> baseline: spec [
 	<baseline>
@@ -50,15 +24,42 @@ BaselineOfAlkalin >> baseline: spec [
 			apical: spec.
 		
 		self 
-			basePackages: spec;
+			corePackages: spec;
+			featurePackages: spec;
 		 	modulePackages: spec;
 		 	examplePackages: spec;
 		 	extraPackages: spec;
 		 	enventSourcingPackages: spec.
 			
-		self groups: spec
+		self 
+			groups: spec;
+			testGroups: spec
 		
 ]
+]
+
+{ #category : #packages }
+BaselineOfAlkalin >> corePackages: spec [
+	
+	spec 
+	
+		"Base packages"
+		package: #'Alkalin-Core';
+		package: #'Alkalin-EventDispatcher' with: [ spec requires: #(#'Alkalin-Core') ];
+		package: #'Alkalin-Di' with: [ spec requires: #(#'Alkalin-Core') ];
+		package: #'Alkalin-HttpMessage' with: [ spec requires: #(#'Alkalin-Core' #ZincHTTPComponents #NeoJSON) ];
+		package: #'Alkalin-HttpRouter' with: [ spec requires: #(#'Alkalin-HttpMessage') ];
+		package: #'Alkalin-HttpServer' with: [ spec requires: #(#'Alkalin-HttpMessage') ];
+		package: #'Alkalin-HttpKernel' with: [ spec requires: #(#'Alkalin-Di' #'Alkalin-EventDispatcher' #'Alkalin-HttpRouter') ];
+		
+		"Tests"
+		package: #'Alkalin-EventDispatcher-Tests' with: [ spec requires: #(#'Alkalin-EventDispatcher') ];
+		package: #'Alkalin-HttpRouter-Tests' with: [ spec requires: #(#'Alkalin-HttpRouter') ];
+		package: #'Alkalin-Di-Tests' with: [ spec requires: #(#'Alkalin-Di') ];
+		package: #'Alkalin-HttpServer-Tests' with: [ spec requires: #(#'Alkalin-HttpServer' #Apical) ];
+		package: #'Alkalin-HttpKernel-Tests' with: [ spec requires: #(#'Alkalin-HttpKernel' #Apical) ]
+		
+		
 ]
 
 { #category : #packages }
@@ -100,6 +101,20 @@ BaselineOfAlkalin >> extraPackages: spec [
 		
 ]
 
+{ #category : #packages }
+BaselineOfAlkalin >> featurePackages: spec [
+	
+	spec 
+	
+		"Feature packages"
+		package: #'Alkalin-Authentication' with: [ spec requires: #(#'Alkalin-HttpMessage') ];
+		
+		"Tests"
+		package: #'Alkalin-Authentication-Tests' with: [ spec requires: #(#'Alkalin-Authentication') ]
+		
+		
+]
+
 { #category : #groups }
 BaselineOfAlkalin >> groups: spec [
 
@@ -110,6 +125,39 @@ BaselineOfAlkalin >> groups: spec [
 			
 		group: 'SecurityModule' with: #(
 			#'AlkalinModule-Security');
+		
+		group: 'TodoAppExample' with: #(
+			#'AlkalinExample-TodoApp');
+		
+		group: 'default' with: #('Core')
+]
+
+{ #category : #packages }
+BaselineOfAlkalin >> modulePackages: spec [
+	spec
+	
+		"Modules"
+		package: #'AlkalinModule-Security' with: [ spec requires: #(#'Alkalin-HttpKernel' #'Alkalin-Authentication') ];
+		
+		"Tests"
+		package: #'AlkalinModule-Security-Tests' with: [ spec requires: #(#'AlkalinModule-Security') ]
+
+
+	
+]
+
+{ #category : #dependencies }
+BaselineOfAlkalin >> neoJson: spec [
+
+	spec 
+		configuration: 'NeoJSON' with: [ spec
+		repository: 'github://svenvc/NeoJSON/repository' ]
+]
+
+{ #category : #groups }
+BaselineOfAlkalin >> testGroups: spec [
+
+	spec 
 		
 		group: 'CoreTests' with: #(
 			#'Alkalin-EventDispatcher-Tests'
@@ -123,33 +171,17 @@ BaselineOfAlkalin >> groups: spec [
 		
 		group: 'ModuleTests' with: #(
 			#'AlkalinModule-Security-Tests');
+			
+		group: 'ExampleTests' with: #(
+			#'AlkalinExample-TodoApp');
 		
 		group: 'Tests' with: #(
 			#'CoreTests'
 			#'FeatureTests'
-			#'ModuleTests');
+			#'ModuleTests'
+			#'ExampleTests')
 		
-		group: 'default' with: #('Core')
-]
-
-{ #category : #packages }
-BaselineOfAlkalin >> modulePackages: spec [
-	spec
 	
-		"Modules"
-		package: #'AlkalinModule-Security' with: [ spec requires: #(#'Alkalin-HttpKernel' #'Alkalin-Authentication') ];
-		package: #'AlkalinModule-Security-Tests' with: [ spec requires: #(#'AlkalinModule-Security') ]
-
-
-	
-]
-
-{ #category : #dependencies }
-BaselineOfAlkalin >> neoJson: spec [
-
-	spec 
-		configuration: 'NeoJSON' with: [ spec
-		repository: 'github://svenvc/NeoJSON/repository' ]
 ]
 
 { #category : #dependencies }
