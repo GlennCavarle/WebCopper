@@ -47,8 +47,7 @@ AKDiContainer >> addServiceFromDefinition: aDef [
 
 { #category : #private }
 AKDiContainer >> clear [
-	instances removeAll.
-	definitions removeAll.
+	services removeAll.
 ]
 
 { #category : #public }
@@ -66,10 +65,21 @@ AKDiContainer >> get: aServiceKey [
 		
 ]
 
+{ #category : #public }
+AKDiContainer >> has: aServiceKey [
+
+	self 
+		assert: [ aServiceKey isSymbol ]
+		description:[ 'Argument must be a Symbol' ].
+	
+	^ aServiceKey = #ServiceContainer or:[services includesKey: aServiceKey].
+	
+		
+]
+
 { #category : #initialization }
 AKDiContainer >> initialize [
 	super initialize.
-	instances := Dictionary new.
 	services := Dictionary new
 ]
 
