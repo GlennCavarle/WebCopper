@@ -7,3 +7,7 @@ os:
 smalltalk:
   - Pharo-alpha
   - Pharo-stable
+  
+smalltalk_config:
+  - .smalltalk.ston
+  - .examples.ston
