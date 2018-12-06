@@ -1,4 +1,5 @@
 SmalltalkCISpec {
+  #name : 'Default',
   #loading : [
     SCIMetacelloLoadSpec {
       #baseline : 'Alkalin',
