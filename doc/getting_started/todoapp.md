@@ -124,19 +124,22 @@ TodoAppConfig >> configureSecurity: aSecurityConfig
 
 ```smalltalk
 TodoController >> doGetList: aRequest
-    ^ self repository selectAll.
+    |list|
+    list := self repository selectAll.
+    ^ AKJsonResponse code: 200 data: list
 
 TodoController >> doGetOne: aRequest
-    | id |
+    | id model |
     id := aRequest paramAt: #id.
-    ^ self repository selectById: id.
+    model := self repository selectById: id.
+    ^ AKJsonResponse code: 200 data: model
 
 TodoController >> doCreate: aRequest
     | newModel text |
     text := aRequest bodyAt: #text.
     newModel := Todo withId: UUID new text: text.
     self repository add: newModel.
-    ^ newModel
+    ^ AKJsonResponse code: 200 data: newModel
 
 TodoController >> doUpdate: aRequest
     |id data model |
@@ -144,7 +147,7 @@ TodoController >> doUpdate: aRequest
     data := aRequest body.
     model := self repository selectById: id.
     model text: (data at:#text).
-    ^ model
+    ^ AKJsonResponse code: 200 data: model 
 
 TodoController >> doDelete: aRequest
     |id|
