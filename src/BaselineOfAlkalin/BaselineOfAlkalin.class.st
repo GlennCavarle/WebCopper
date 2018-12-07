@@ -147,7 +147,7 @@ BaselineOfAlkalin >> modulePackages: spec [
 		
 		"Tests"
 		package: #'AlkalinModule-Security-Tests' with: [ spec requires: #(#'AlkalinModule-Security') ];
-		package: #'AlkalinModule-Walrus-Tests' with: [ spec requires: #(#'AlkalinModule-Walrus' #'Walrus-Metadata-Tests') ]
+		package: #'AlkalinModule-Walrus-Tests' with: [ spec requires: #(#'AlkalinModule-Walrus') ]
 
 ]
 
