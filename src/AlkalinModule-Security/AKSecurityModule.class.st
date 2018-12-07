@@ -9,7 +9,7 @@ AKSecurityModule class >> defaultConfiguration [
 	^ AKSecurityModuleConfig new
 ]
 
-{ #category : #'instance creation' }
+{ #category : #configuring }
 AKSecurityModule >> configureEventListeners: anEventDispatcher [
 	| map |
 	self configuration isConfigured ifFalse: [ ^ self ].
@@ -17,7 +17,7 @@ AKSecurityModule >> configureEventListeners: anEventDispatcher [
 	anEventDispatcher addSubscriber: (AKSecuritySubscriber withAuthenticatorMap: map)
 ]
 
-{ #category : #'instance creation' }
+{ #category : #configuring }
 AKSecurityModule >> configureServiceContainer: aDiContainer [
 
 	aDiContainer 
@@ -26,7 +26,7 @@ AKSecurityModule >> configureServiceContainer: aDiContainer [
 			targetClass: AKAuthorizationService]
 ]
 
-{ #category : #'instance creation' }
+{ #category : #configuring }
 AKSecurityModule >> load: aDiContainer config: aKernelConfig [
 
 	self send: #configureSecurity: on: aKernelConfig with: self configuration.

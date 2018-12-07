@@ -21,7 +21,8 @@ BaselineOfAlkalin >> baseline: spec [
 		self
 			zincComponents: spec;
 			neoJson: spec;
-			apical: spec.
+			apical: spec;
+			walrus:spec.
 		
 		self 
 			corePackages: spec;
@@ -127,6 +128,8 @@ BaselineOfAlkalin >> groups: spec [
 			
 		group: 'SecurityModule' with: #(
 			#'AlkalinModule-Security');
+		group: 'WalrusModule' with: #(
+			#'AlkalinModule-Walrus');
 		
 		group: 'TodoAppExample' with: #(
 			#'AlkalinExample-TodoApp');
@@ -140,12 +143,12 @@ BaselineOfAlkalin >> modulePackages: spec [
 	
 		"Modules"
 		package: #'AlkalinModule-Security' with: [ spec requires: #(#'Alkalin-HttpKernel' #'Alkalin-Authentication') ];
+		package: #'AlkalinModule-Walrus' with: [ spec requires: #(#'Alkalin-HttpKernel' #'Walrus') ];
 		
 		"Tests"
-		package: #'AlkalinModule-Security-Tests' with: [ spec requires: #(#'AlkalinModule-Security') ]
+		package: #'AlkalinModule-Security-Tests' with: [ spec requires: #(#'AlkalinModule-Security') ];
+		package: #'AlkalinModule-Walrus-Tests' with: [ spec requires: #(#'AlkalinModule-Walrus' #'Walrus-Metadata-Tests') ]
 
-
-	
 ]
 
 { #category : #dependencies }
@@ -172,7 +175,8 @@ BaselineOfAlkalin >> testGroups: spec [
 			#'Alkalin-Authentication-Tests');
 		
 		group: 'ModuleTests' with: #(
-			#'AlkalinModule-Security-Tests');
+			#'AlkalinModule-Security-Tests'
+			#'AlkalinModule-Walrus-Tests');
 			
 		group: 'ExampleTests' with: #(
 			#'AlkalinExample-TodoApp');
@@ -184,6 +188,14 @@ BaselineOfAlkalin >> testGroups: spec [
 			#'ExampleTests')
 		
 	
+]
+
+{ #category : #dependencies }
+BaselineOfAlkalin >> walrus: spec [
+
+	spec
+		baseline: 'Walrus' with: [ spec
+		repository: 'github://GlennCavarle/Walrus/src' ].
 ]
 
 { #category : #dependencies }

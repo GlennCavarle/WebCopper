@@ -36,6 +36,11 @@ AKDiService >> getOrCreateInstanceUsing: aServiceContainer [
 ]
 
 { #category : #accessing }
+AKDiService >> identifier [
+	^ definition identifier
+]
+
+{ #category : #accessing }
 AKDiService >> instance [
 	^ instance
 ]
