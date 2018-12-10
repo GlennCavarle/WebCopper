@@ -11,8 +11,12 @@ Class {
 AKBasicAuthenticator >> authenticateRequest: anHttpRequest [
 	<return: #AKAuthResult>
 	| authToken userToken |
-	authToken := self extractTokenFromRequest: anHttpRequest onFailure: [ ^ self challengeClient ].
-	[userToken := self userProviderManager authenticateToken: authToken] on:Error do:[ ^ self challengeClient].
+	
+	[
+		authToken := self extractTokenFromRequest: anHttpRequest.
+		userToken := self userProviderManager authenticateToken: authToken.
+	] on:Error do:[:ex| ^ self challengeClient:ex ].
+	
 	^ AKAuthResult successWithToken: userToken
 ]
 
@@ -22,23 +26,24 @@ AKBasicAuthenticator >> basicHeader [
 ]
 
 { #category : #authenticating }
-AKBasicAuthenticator >> challengeClient [
+AKBasicAuthenticator >> challengeClient: anException [
 	<return: #AKAuthResult>
 	| response |
 	response := AKHttpResponse
 		unauthorized: self basicHeader
-		entity: (ZnEntity textCRLF: 'Unauthorized').
+		entity: (ZnEntity textCRLF: anException messageText).
 		
 	^ AKAuthResult failureWithResponse: response
 ]
 
 { #category : #authenticating }
-AKBasicAuthenticator >> extractTokenFromRequest: anHttpRequest onFailure: aFailureBlock [
+AKBasicAuthenticator >> extractTokenFromRequest: anHttpRequest [
 	<return: #AKAuthToken>
-	| authData authHeader|
-	authHeader := anHttpRequest headers at: 'Authorization' ifAbsent: aFailureBlock.
-	authData := [anHttpRequest basicAuthentication] on: Error do: aFailureBlock.
-	(authData anySatisfy:#isEmpty) ifTrue:  aFailureBlock.
+	| authData |
+	anHttpRequest headers at: 'Authorization' ifAbsent: [ Error signal: 'Incorrect Authorization header' ].
+	authData := anHttpRequest basicAuthentication.
+	(authData anySatisfy:#isEmpty) ifTrue: [ Error signal: 'Incorrect Authorization header' ].
+	
 	^ AKUserPwdToken username: authData first password: authData second.
 	
 	

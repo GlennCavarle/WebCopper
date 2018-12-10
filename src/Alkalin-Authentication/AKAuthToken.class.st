@@ -8,6 +8,11 @@ Class {
 	#category : #'Alkalin-Authentication-Token'
 }
 
+{ #category : #accessing }
+AKAuthToken >> beAuthenticated [
+	isAuthenticated := true
+]
+
 { #category : #'as yet unclassified' }
 AKAuthToken >> clearCredentials [
 ]
@@ -30,6 +35,5 @@ AKAuthToken >> user [
 
 { #category : #accessing }
 AKAuthToken >> user: anObject [
-	user := anObject.
-	isAuthenticated := true
+	user := anObject
 ]

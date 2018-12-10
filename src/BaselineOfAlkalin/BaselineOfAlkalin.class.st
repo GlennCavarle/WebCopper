@@ -111,6 +111,7 @@ BaselineOfAlkalin >> featurePackages: spec [
 		"Feature packages"
 		package: #'Alkalin-Html';
 		package: #'Alkalin-Authentication' with: [ spec requires: #(#'Alkalin-HttpMessage') ];
+		package: #'Alkalin-OAuth2' with: [ spec requires: #(#'Alkalin-Authentication') ];
 		
 		"Tests"
 		package: #'Alkalin-Html-Tests' with: [ spec requires: #(#'Alkalin-Html') ];
@@ -129,6 +130,7 @@ BaselineOfAlkalin >> groups: spec [
 			
 		group: 'SecurityModule' with: #(
 			#'AlkalinModule-Security');
+			
 		group: 'WalrusModule' with: #(
 			#'AlkalinModule-Walrus');
 		

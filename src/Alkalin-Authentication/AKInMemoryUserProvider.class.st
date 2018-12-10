@@ -23,6 +23,7 @@ AKInMemoryUserProvider >> authenticateToken: aToken [
 	^ aToken 
 		user: authUser;
 		clearCredentials;
+		beAuthenticated;
 		yourself.
 ]
 
