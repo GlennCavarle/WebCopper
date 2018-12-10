@@ -158,7 +158,7 @@ BaselineOfAlkalin >> modulePackages: spec [
 BaselineOfAlkalin >> neoJson: spec [
 
 	spec 
-		configuration: 'NeoJSON' with: [ spec
+		baseline: 'NeoJSON' with: [ spec
 		repository: 'github://svenvc/NeoJSON/repository' ]
 ]
 
