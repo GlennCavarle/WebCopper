@@ -30,7 +30,8 @@ BaselineOfAlkalin >> baseline: spec [
 		 	modulePackages: spec;
 		 	examplePackages: spec;
 		 	extraPackages: spec;
-		 	enventSourcingPackages: spec.
+		 	enventSourcingPackages: spec;
+			toolPackages: spec.
 			
 		self 
 			groups: spec;
@@ -188,6 +189,16 @@ BaselineOfAlkalin >> testGroups: spec [
 			#'ExampleTests')
 		
 	
+]
+
+{ #category : #packages }
+BaselineOfAlkalin >> toolPackages: spec [
+	
+	spec 
+	
+		"Tool packages"
+		package: #'AlkalinTool-Refactoring';
+		package: #'AlkalinTool-Scaffolding'
 ]
 
 { #category : #dependencies }
