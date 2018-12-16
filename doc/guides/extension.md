@@ -1,6 +1,6 @@
 # The Extension System
 
-An extension allows to make some processes at the end of the configuration stage.  
+An extension allows one to make some processes at the end of the configuration stage.  
 It is commonly used to manipulate the [DI container](#), adding some services or registring some event listeners based on the container configuration.
 
 
