@@ -1,13 +1,13 @@
 # Authentication
 
-The Authentication component is based on several concepts allowing the definition of custom authentication systems :
+The Authentication component is based on several concepts allowing the definition of custom authentication systems:
 
-* **UserProvider** : how to retrieve a user from a token
-* **UserProviderManager** : how to manage multiple User Providers
-* **Authenticator** : how to craft a token from input request
-* **AuthenticatorMap** : how to map urls to authenticators
-* **Token** : how to represent credentials
-* **AuthenticationService** : how to check user rights
+* **UserProvider**: how to retrieve a user from a token
+* **UserProviderManager**: how to manage multiple User Providers
+* **Authenticator**: how to craft a token from input request
+* **AuthenticatorMap**: how to map urls to authenticators
+* **Token**: how to represent credentials
+* **AuthenticationService**: how to check user rights
 
 
 ## Standalone usage
