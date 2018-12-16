@@ -20,7 +20,7 @@ Metacello new
 
 In Alkalin, there is a clear separation between your application and the server which serves it.  
  
-An application is basically a request handler which manage how to create the right a response depending on the route called. This is the role of the Kernel: managing the request lifecycle in order to produce a response.
+An application is basically a request handler which manages how to create the right response depending on the route called. This is the role of the Kernel: managing the request lifecycle to produce a response.
 
 The simplest way to create your first app is to script it like this :
 
@@ -35,7 +35,7 @@ myApp := AKKernel configure:[:k|
 
 The server is only the bridge between your application and the external world. It creates requests (AKHttpRequest) from client raw data, it serves them to the registred handlers and finally it converts the returning responses (AKHttpResponse) to raw data in order to be returned to the client.
 
-Basically, you can register your application ans start a server as below :
+Basically, you can register your application ans start a server as below:
 
 ```smalltalk
 "2) Start the server"
@@ -46,7 +46,7 @@ AKHttpServer on
 ```
 
 
-> **Tips:** These 2 steps can also be done in once :  
+> **Tips:** These 2 steps can also be done in once:  
 
 ```smalltalk
 AKHttpServer on
