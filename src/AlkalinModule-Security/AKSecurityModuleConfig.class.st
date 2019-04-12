@@ -9,6 +9,14 @@ Class {
 }
 
 { #category : #adding }
+AKSecurityModuleConfig >> addAuthProvider: aBlock [
+	| providerBuilder |
+	providerBuilder := AKUserProviderBuilder new.
+	aBlock value: providerBuilder.
+	userProviderBuilders add: providerBuilder
+]
+
+{ #category : #adding }
 AKSecurityModuleConfig >> addAuthenticator: aBlock [
 	| auth |
 	auth := AKAuthenticatorBuilder new.
@@ -16,24 +24,16 @@ AKSecurityModuleConfig >> addAuthenticator: aBlock [
 	authenticatorBuilders add: auth
 ]
 
-{ #category : #adding }
-AKSecurityModuleConfig >> addUserProvider: aBlock [
-	| providerBuilder |
-	providerBuilder := AKUserProviderBuilder new.
-	aBlock value: providerBuilder.
-	userProviderBuilders add: providerBuilder
-]
-
 { #category : #building }
 AKSecurityModuleConfig >> buildAuthenticatorMap [
 	| authMap userProviders manager |
 	authMap := AKAuthenticatorMap new.
 	userProviders := userProviderBuilders collect: [ :b | b buildProvider ].
-	manager := AKUserProviderManager withProviders: userProviders.
+	manager := AKAuthProviderManager withProviders: userProviders.
 	authenticatorBuilders do: [ :b | 
 			| auth |
 			auth := b buildAuthenticator.
-			auth userProviderManager: manager.
+			auth authProviderManager: manager.
 			authMap map: b requestMatcher to: auth ].
 	^ authMap
 ]

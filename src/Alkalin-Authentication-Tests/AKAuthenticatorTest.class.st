@@ -13,7 +13,7 @@ AKAuthenticatorTest >> testBasic [
 		addUser: (AKUser username: 'Brenda' password: 'password').
 		
 	basicAuth := AKBasicAuthenticator new
-			 			userProviderManager: (AKUserProviderManager withProviders: {userProvider});
+			 			authProviderManager: (AKAuthProviderManager withProviders: {userProvider});
 						yourself.
 	
 	map := AKAuthenticatorMap new

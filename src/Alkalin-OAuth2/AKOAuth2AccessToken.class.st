@@ -7,7 +7,7 @@ Class {
 		'scope',
 		'expiresAt'
 	],
-	#category : #'Alkalin-OAuth2-Model'
+	#category : #'Alkalin-OAuth2-Token'
 }
 
 { #category : #testing }

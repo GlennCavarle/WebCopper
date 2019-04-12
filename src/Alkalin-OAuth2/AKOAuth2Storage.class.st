@@ -4,7 +4,27 @@ Class {
 	#category : #'Alkalin-OAuth2-Storage'
 }
 
-{ #category : #'as yet unclassified' }
-AKOAuth2Storage >> accessTokenFromAuthToken: aToken [
-	self subclassResponsibility 
+{ #category : #testing }
+AKOAuth2Storage >> supportsAuthCode [
+	^ false
+]
+
+{ #category : #testing }
+AKOAuth2Storage >> supportsClientCredentials [
+	^ false
+]
+
+{ #category : #testing }
+AKOAuth2Storage >> supportsExtendedGrantType [
+	^ false
+]
+
+{ #category : #testing }
+AKOAuth2Storage >> supportsRefreshToken [
+	^ false
+]
+
+{ #category : #testing }
+AKOAuth2Storage >> supportsUserCredentials [
+	^ false
 ]

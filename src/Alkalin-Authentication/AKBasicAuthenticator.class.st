@@ -14,7 +14,7 @@ AKBasicAuthenticator >> authenticateRequest: anHttpRequest [
 	
 	[
 		authToken := self extractTokenFromRequest: anHttpRequest.
-		userToken := self userProviderManager authenticateToken: authToken.
+		userToken := self authProviderManager authenticateToken: authToken.
 	] on:Error do:[:ex| ^ self challengeClient:ex ].
 	
 	^ AKAuthResult successWithToken: userToken

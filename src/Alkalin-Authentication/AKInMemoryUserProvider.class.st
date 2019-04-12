@@ -1,6 +1,6 @@
 Class {
 	#name : #AKInMemoryUserProvider,
-	#superclass : #AKAbstractUserProvider,
+	#superclass : #AKAbstractAuthProvider,
 	#instVars : [
 		'users'
 	],

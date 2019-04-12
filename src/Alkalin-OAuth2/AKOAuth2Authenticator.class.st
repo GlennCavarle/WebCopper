@@ -1,24 +1,43 @@
 Class {
 	#name : #AKOAuth2Authenticator,
 	#superclass : #AKAbstractAuthenticator,
+	#instVars : [
+		'authService'
+	],
 	#category : #'Alkalin-OAuth2-Authenticator'
 }
 
-{ #category : #authenticating }
-AKOAuth2Authenticator >> authenticateRequest: anHttpRequest [
-	<return: #AKAuthResult>
-	| authToken accessToken |
-	[
-		authToken := self extractBearerTokenFromRequestHeader: anHttpRequest.
-		accessToken := self userProviderManager authenticateToken: authToken
-	] on:Error do:[:ex| ^ self challengeClient: ex].
+{ #category : #accessing }
+AKOAuth2Authenticator class >> authService: anOAuthServer [
+	^ self new
+		authService: anOAuthServer;
+		yourself
+]
 
-	^ AKAuthResult successWithToken: accessToken
+{ #category : #accessing }
+AKOAuth2Authenticator >> authService [
+	^ authService
+]
+
+{ #category : #accessing }
+AKOAuth2Authenticator >> authService: anObject [
+	authService := anObject
 ]
 
 { #category : #authenticating }
-AKOAuth2Authenticator >> basicHeader [
-	^ 'Basic realm="' , self realm , '"'
+AKOAuth2Authenticator >> authenticateRequest: anHttpRequest [
+	| oAuthToken |
+	[
+		oAuthToken := self authService extractBearerTokenFromRequest: anHttpRequest.
+		oAuthToken := self authProviderManager authenticateToken: oAuthToken
+	] on:AKException do:[:ex| ^ self challengeClient: ex].
+
+	^ AKAuthResult successWithToken: oAuthToken
+]
+
+{ #category : #authenticating }
+AKOAuth2Authenticator >> bearerHeader [
+	^ 'Bearer realm="' , self realm , '"'
 ]
 
 { #category : #authenticating }
@@ -26,29 +45,13 @@ AKOAuth2Authenticator >> challengeClient: anException [
 	<return: #AKAuthResult>
 	| response |
 	response := AKHttpResponse
-		unauthorized: self basicHeader
+		unauthorized: self bearerHeader
 		entity: (ZnEntity textCRLF: anException messageText).
 		
 	^ AKAuthResult failureWithResponse: response
 ]
 
 { #category : #authenticating }
-AKOAuth2Authenticator >> extractBearerTokenFromRequestHeader: anHttpRequest [
-	<return: #AKAuthToken>
-	| authHeader authHeaderPart oauth2Token |
-	
-	authHeader := anHttpRequest headers at: 'Authorization' 
-		ifAbsent: [ Error signal: 'Incorrect Authorization header' ].
-	
-	authHeaderPart := authHeader findTokens: ' '.
-	(authHeaderPart size = 2 and: [ authHeaderPart first = 'Bearer' ])
-		ifFalse: [ Error signal: 'Incorrect Authorization header' ].
-		
-	oauth2Token := AKOAuth2Token token: authHeaderPart second.
-	^ oauth2Token
-]
-
-{ #category : #accessing }
 AKOAuth2Authenticator >> realm [
 	^ 'Secured Area'
 ]

@@ -5,22 +5,22 @@ Class {
 	#name : #AKAbstractAuthenticator,
 	#superclass : #Object,
 	#instVars : [
-		'userProviderManager'
+		'authProviderManager'
 	],
 	#category : #'Alkalin-Authentication-Authenticator'
 }
 
+{ #category : #accessing }
+AKAbstractAuthenticator >> authProviderManager [
+	^ authProviderManager
+]
+
+{ #category : #accessing }
+AKAbstractAuthenticator >> authProviderManager: anObject [
+	authProviderManager := anObject
+]
+
 { #category : #authenticating }
 AKAbstractAuthenticator >> authenticateRequest: anHttpRequest [
 	self subclassResponsibility 
-]
-
-{ #category : #accessing }
-AKAbstractAuthenticator >> userProviderManager [
-	^ userProviderManager
-]
-
-{ #category : #accessing }
-AKAbstractAuthenticator >> userProviderManager: anObject [
-	userProviderManager := anObject
 ]
