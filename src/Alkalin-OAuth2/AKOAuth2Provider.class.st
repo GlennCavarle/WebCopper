@@ -25,13 +25,13 @@ AKOAuth2Provider >> authService: anObject [
 ]
 
 { #category : #authenticating }
-AKOAuth2Provider >> authenticateToken: aToken [
+AKOAuth2Provider >> authenticateToken: anOAuthToken [
 	| accessToken|
-	accessToken := self authService verifyAccessToken: aToken token.
+	accessToken := self authService verifyAccessToken: anOAuthToken token.
 	
 	"@todo scope management"
 
-	^ aToken 
+	^ anOAuthToken 
 		user: accessToken data;
 		clearCredentials;
 		beAuthenticated;

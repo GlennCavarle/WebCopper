@@ -6,13 +6,16 @@ Class {
 
 { #category : #tests }
 AKOAuth2ServerTest >> testClientAuthorizeCode [
-	| storage oAuthServer aRequest anUriString |
+	| storage oAuthServer aRequest anUriString redirectUrl |
 	storage := AKOAuth2TestingStorage new.
 	oAuthServer := AKOAuth2Server storage: storage.
-	aRequest := AKHttpRequest get: '/auth?response_type=code&client_id=test-client-id&redirect_uri=http://test.com/redirect'.
-	anUriString := oAuthServer buildClientRedirectUri: aRequest.
-	
-	self assert: (anUriString beginsWith: 'http://test.com/redirect')
+	aRequest := AKHttpRequest get: '/auth?response_type=code&client_id=test-client-id&redirect_uri=http://test.com/redirect&state=state123'.
+	anUriString := oAuthServer buildClientRedirectUri: aRequest withData:nil.
+	redirectUrl := ZnUrl fromString: anUriString.
+	self assert: (redirectUrl asString beginsWith: 'http://test.com/redirect').
+	self assert: (redirectUrl queryKeys includes:#code).
+	self assert: (redirectUrl queryKeys includes:#state).
+	self assert: (redirectUrl queryAt:#state) = #state123.
 ]
 
 { #category : #tests }

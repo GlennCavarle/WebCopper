@@ -1,12 +1,9 @@
 Class {
 	#name : #AKOAuth2GrantParams,
-	#superclass : #Object,
+	#superclass : #AKOAuth2RequestParams,
 	#instVars : [
-		'clientId',
 		'clientSecret',
 		'grantType',
-		'scope',
-		'redirectUri',
 		'username',
 		'password',
 		'refreshToken',
@@ -29,16 +26,6 @@ AKOAuth2GrantParams >> clientCredentials [
 ]
 
 { #category : #accessing }
-AKOAuth2GrantParams >> clientId [
-	^ clientId
-]
-
-{ #category : #accessing }
-AKOAuth2GrantParams >> clientId: anObject [
-	clientId := anObject
-]
-
-{ #category : #accessing }
 AKOAuth2GrantParams >> clientSecret [
 	^ clientSecret
 ]
@@ -58,7 +45,7 @@ AKOAuth2GrantParams >> code: anObject [
 	code := anObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #private }
 AKOAuth2GrantParams >> ensureRedirectUriBasedOnAuthCode: anAuthCode [
 	| parsedUri |
 	
@@ -120,16 +107,6 @@ AKOAuth2GrantParams >> password: anObject [
 ]
 
 { #category : #accessing }
-AKOAuth2GrantParams >> redirectUri [
-	^ redirectUri
-]
-
-{ #category : #accessing }
-AKOAuth2GrantParams >> redirectUri: anObject [
-	redirectUri := anObject
-]
-
-{ #category : #accessing }
 AKOAuth2GrantParams >> refreshToken [
 	^ refreshToken
 ]
@@ -137,16 +114,6 @@ AKOAuth2GrantParams >> refreshToken [
 { #category : #accessing }
 AKOAuth2GrantParams >> refreshToken: anObject [
 	refreshToken := anObject
-]
-
-{ #category : #accessing }
-AKOAuth2GrantParams >> scope [
-	^ scope
-]
-
-{ #category : #accessing }
-AKOAuth2GrantParams >> scope: anObject [
-	scope := anObject
 ]
 
 { #category : #accessing }

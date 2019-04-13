@@ -69,7 +69,7 @@ AKOAuth2InMemoryStorage >> createAuthCode:aStringCode withParams: aParamsObject 
 	^ self addAuthCode: (AKOAuth2AuthCodeModel new
 				token: aStringCode;
 				clientId: aParamsObject clientId;
-				expiresIn: aParamsObject accessTokenLifetime;
+				expiresIn: aParamsObject authCodeLifetime;
 				redirectUri: aParamsObject redirectUri;
 				scope: aParamsObject scope;
 				data: aParamsObject data)

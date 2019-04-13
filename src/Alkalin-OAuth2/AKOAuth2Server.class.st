@@ -45,13 +45,13 @@ AKOAuth2Server >> bearerTokenFromQuery: anHttpRequest [
 ]
 
 { #category : #authorize }
-AKOAuth2Server >> buildClientRedirectUri: aRequest [
-	| params client|
+AKOAuth2Server >> buildClientRedirectUri: aRequest withData:data [
+	| params client authCodeData |
 	params := AKOAuth2AuthorizeParams fromRequest: aRequest.
-	client := self retrieveClient:  params clientId.
+	client := self retrieveClient: params clientId.
 	params ensureRedirectUriBasedOnClient: client.
-	
-	^ params callbackUri
+	authCodeData := self createAuthCode: params client: client data: data.
+	^ authCodeData redirectUri 
 ]
 
 { #category : #private }
@@ -73,9 +73,9 @@ AKOAuth2Server >> checkGrantType: grantType forClient: aClient [
 
 { #category : #'private - grant ' }
 AKOAuth2Server >> createAccessToken: grantData [
-	| atokenStr rtokenStr respToken |
+	| atokenStr rtokenStr accessToken |
 	
-	respToken := AKOAuth2GrantAccessToken new
+	accessToken := AKOAuth2AccessToken new
 		expiresIn: grantData accessTokenLifetime;
 		tokenType: 'bearer';
 		scope: grantData scope;
@@ -84,12 +84,12 @@ AKOAuth2Server >> createAccessToken: grantData [
 	atokenStr := self genRandomToken.
 	
 	self storage createAccessToken: atokenStr withParams: grantData.
-	respToken accessToken: atokenStr.
+	accessToken accessToken: atokenStr.
 	
 	(self storage supportsRefreshToken and: [ grantData issueRefreshToken ]) ifTrue: [ 
 			rtokenStr := self genRandomToken.
 			self storage createRefreshToken: rtokenStr withParams: grantData.
-			respToken refreshToken: rtokenStr.
+			accessToken refreshToken: rtokenStr.
 			
 			grantData usedRefreshToken ifNotNil: [ :t | 
 					self storage unsetRefreshToken: t token.
@@ -99,12 +99,26 @@ AKOAuth2Server >> createAccessToken: grantData [
 		ifTrue: [ self storage markAuthCodeAsUsed: grantData usedAuthCode token.
 			grantData usedAuthCode: nil ].
 		
-	^ respToken
+	^ accessToken
+]
+
+{ #category : #authorize }
+AKOAuth2Server >> createAuthCode: aParamsObject client: aClient data: data [
+	| acstr authData|
+	acstr := self genRandomToken.
+	authData := AKOAuth2AuthorizeData new
+		client: aClient;
+		scope: aParamsObject scope;
+		data: data;
+		redirectUri:  (aParamsObject callbackUriWithCode: acstr).
+		
+	self storage createAuthCode: acstr withParams: authData.
+	^ authData
 ]
 
 { #category : #authenticate }
 AKOAuth2Server >> extractBearerTokenFromRequest: anHttpRequest [
-	<return: #AKOAuth2AccessToken>
+	<return: #AKOAuth2Token>
 	| tokens oauth2Token|
 	tokens := OrderedCollection new.
 	

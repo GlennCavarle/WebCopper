@@ -1,13 +1,10 @@
 Class {
 	#name : #AKOAuth2AuthorizeParams,
-	#superclass : #Object,
+	#superclass : #AKOAuth2RequestParams,
 	#instVars : [
 		'client',
 		'responseType',
-		'redirectUri',
-		'state',
-		'scope',
-		'clientId'
+		'state'
 	],
 	#category : #'Alkalin-OAuth2-Service'
 }
@@ -20,45 +17,25 @@ AKOAuth2AuthorizeParams class >> fromRequest: aRequest [
 ]
 
 { #category : #accessing }
-AKOAuth2AuthorizeParams >> callbackUri [
+AKOAuth2AuthorizeParams >> callbackUriWithCode: anAuthCode [
 	| redirectUriCallback |
 	redirectUriCallback := ZnUrl fromString: self redirectUri.
 	
-	self responseType == AKOAuth2ResponseType AUTH_CODE
+	self responseType = AKOAuth2ResponseType AUTH_CODE
 		ifTrue: [ redirectUriCallback
-				queryAt: 'code' put: self code;
+				queryAt: 'code' put: anAuthCode;
 				queryAt: 'state' put: self state ].
 	
-	self responseType == AKOAuth2ResponseType AUTH_TOKEN
+	self responseType = AKOAuth2ResponseType AUTH_TOKEN
 		ifTrue: [ redirectUriCallback
 				fragment: (String streamContents: [ :stream | 
 							ZnResourceMetaUtils 
 								writeQueryFields:
-									{(#code -> self code).
+									{(#code -> anAuthCode).
 									(#state -> self state)} asDictionary
 								on: stream ]) ].
 						
 	^ redirectUriCallback asString
-]
-
-{ #category : #accessing }
-AKOAuth2AuthorizeParams >> client [
-	^ client
-]
-
-{ #category : #accessing }
-AKOAuth2AuthorizeParams >> client: anObject [
-	client := anObject
-]
-
-{ #category : #accessing }
-AKOAuth2AuthorizeParams >> clientId [
-	^ clientId
-]
-
-{ #category : #accessing }
-AKOAuth2AuthorizeParams >> clientId: anObject [
-	clientId := anObject
 ]
 
 { #category : #initialization }
@@ -92,16 +69,6 @@ AKOAuth2AuthorizeParams >> initializeFromRequest: aRequest [
 ]
 
 { #category : #accessing }
-AKOAuth2AuthorizeParams >> redirectUri [
-	^ redirectUri
-]
-
-{ #category : #accessing }
-AKOAuth2AuthorizeParams >> redirectUri: anObject [
-	redirectUri := anObject
-]
-
-{ #category : #accessing }
 AKOAuth2AuthorizeParams >> responseType [
 	^ responseType
 ]
@@ -109,16 +76,6 @@ AKOAuth2AuthorizeParams >> responseType [
 { #category : #accessing }
 AKOAuth2AuthorizeParams >> responseType: anObject [
 	responseType := anObject
-]
-
-{ #category : #accessing }
-AKOAuth2AuthorizeParams >> scope [
-	^ scope
-]
-
-{ #category : #accessing }
-AKOAuth2AuthorizeParams >> scope: anObject [
-	scope := anObject
 ]
 
 { #category : #accessing }
