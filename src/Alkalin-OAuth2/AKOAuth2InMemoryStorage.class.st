@@ -7,7 +7,8 @@ Class {
 		'clients',
 		'codes',
 		'accessTokens',
-		'refreshTokens'
+		'refreshTokens',
+		'users'
 	],
 	#category : #'Alkalin-OAuth2-Storage'
 }
@@ -27,14 +28,29 @@ AKOAuth2InMemoryStorage >> addClient: aClient [
 	^ clients add: aClient
 ]
 
+{ #category : #accessing }
+AKOAuth2InMemoryStorage >> addUser: aUser [
+	^ users add: aUser
+]
+
+{ #category : #'client credentials' }
+AKOAuth2InMemoryStorage >> checkClientCredentialsGrant: aClient withSecret: clientSecret [
+	^ aClient clientSecret = clientSecret
+]
+
 { #category : #client }
 AKOAuth2InMemoryStorage >> checkClientSecret: clientSecret forClient: aClient [
-	^ aClient clientSecret = clientSecret
+	^ clientSecret = nil or:[aClient clientSecret = clientSecret]
 ]
 
 { #category : #client }
 AKOAuth2InMemoryStorage >> checkGrantType: grantType forClient: aClient [
 	^ aClient allowedGrantTypes includes: grantType
+]
+
+{ #category : #'user credentials' }
+AKOAuth2InMemoryStorage >> checkUserCredentials: credentials withClient: aClient [
+	^ users anySatisfy: [ :u| u username = credentials first and:[u password = credentials second]]
 ]
 
 { #category : #'access token' }
@@ -93,6 +109,7 @@ AKOAuth2InMemoryStorage >> findRefreshToken: aStringToken [
 { #category : #initialization }
 AKOAuth2InMemoryStorage >> initialize [ 
 	super initialize.
+	users := OrderedCollection new.
 	clients := OrderedCollection new.
 	codes := OrderedCollection new.
 	accessTokens := OrderedCollection new.
