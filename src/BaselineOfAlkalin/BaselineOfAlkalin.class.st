@@ -156,10 +156,11 @@ BaselineOfAlkalin >> modulePackages: spec [
 
 { #category : #dependencies }
 BaselineOfAlkalin >> neoJson: spec [
-
+#BaselineOfNeoJSON asPackageIfAbsent: [ 
 	spec 
 		baseline: 'NeoJSON' with: [ spec
-		repository: 'github://svenvc/NeoJSON:v17/repository' ]
+		repository: 'github://svenvc/NeoJSON/repository' ]
+]
 ]
 
 { #category : #groups }
