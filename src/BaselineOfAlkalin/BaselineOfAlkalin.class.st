@@ -159,8 +159,7 @@ BaselineOfAlkalin >> neoJson: spec [
 
 	spec 
 		baseline: 'NeoJSON' with: [ spec
-		repository: 'github://svenvc/NeoJSON/repository' ];
-		onConflict: [ :ex | ex allow ]
+		repository: 'github://svenvc/NeoJSON:v17/repository' ]
 ]
 
 { #category : #groups }
