@@ -55,7 +55,8 @@ AKOAuth2GrantData >> initialize [
 	
 	accessTokenLifetime := 3600.
 	issueRefreshToken := true.
-	refreshTokenLifetime := 1209600
+	refreshTokenLifetime := 1209600.
+	scope := ''
 ]
 
 { #category : #accessing }

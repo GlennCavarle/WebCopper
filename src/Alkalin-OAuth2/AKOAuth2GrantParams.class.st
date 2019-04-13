@@ -96,7 +96,7 @@ AKOAuth2GrantParams >> initializeFromRequest: aRequest [
 	grantType := aRequest paramAt: 'grant_type' ifAbsent: [ AKOAuth2InvalidRequest  signal: 'Invalid grant_type parameter or parameter missing' ].
 	scope := aRequest paramAt: 'scope' ifAbsent: [ '' ].
 	code := aRequest paramAt: 'code' ifAbsent: [ nil ].
-	redirectUri := aRequest paramAt: 'redirect_uri'.
+	redirectUri := aRequest paramAt: 'redirect_uri' ifAbsent: [ nil ].
 	username := aRequest paramAt: 'username' ifAbsent: [ nil ].
 	password := aRequest paramAt: 'password' ifAbsent: [ nil ].
 	refreshToken := aRequest paramAt: 'refresh_token' ifAbsent: [ nil ].

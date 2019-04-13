@@ -1,5 +1,5 @@
 Class {
-	#name : #AKOAuth2GrantToken,
+	#name : #AKOAuth2GrantAccessToken,
 	#superclass : #Object,
 	#instVars : [
 		'accessToken',
@@ -12,51 +12,51 @@ Class {
 }
 
 { #category : #accessing }
-AKOAuth2GrantToken >> accessToken [
+AKOAuth2GrantAccessToken >> accessToken [
 	^ accessToken
 ]
 
 { #category : #accessing }
-AKOAuth2GrantToken >> accessToken: anObject [
+AKOAuth2GrantAccessToken >> accessToken: anObject [
 	accessToken := anObject
 ]
 
 { #category : #accessing }
-AKOAuth2GrantToken >> expiresIn [
+AKOAuth2GrantAccessToken >> expiresIn [
 	^ expiresIn
 ]
 
 { #category : #accessing }
-AKOAuth2GrantToken >> expiresIn: anObject [
+AKOAuth2GrantAccessToken >> expiresIn: anObject [
 	expiresIn := anObject
 ]
 
 { #category : #accessing }
-AKOAuth2GrantToken >> refreshToken [
+AKOAuth2GrantAccessToken >> refreshToken [
 	^ refreshToken
 ]
 
 { #category : #accessing }
-AKOAuth2GrantToken >> refreshToken: anObject [
+AKOAuth2GrantAccessToken >> refreshToken: anObject [
 	refreshToken := anObject
 ]
 
 { #category : #accessing }
-AKOAuth2GrantToken >> scope [
+AKOAuth2GrantAccessToken >> scope [
 	^ scope
 ]
 
 { #category : #accessing }
-AKOAuth2GrantToken >> scope: anObject [
+AKOAuth2GrantAccessToken >> scope: anObject [
 	scope := anObject
 ]
 
 { #category : #accessing }
-AKOAuth2GrantToken >> tokenType [
+AKOAuth2GrantAccessToken >> tokenType [
 	^ tokenType
 ]
 
 { #category : #accessing }
-AKOAuth2GrantToken >> tokenType: anObject [
+AKOAuth2GrantAccessToken >> tokenType: anObject [
 	tokenType := anObject
 ]

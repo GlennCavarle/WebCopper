@@ -75,7 +75,7 @@ AKOAuth2Server >> checkGrantType: grantType forClient: aClient [
 AKOAuth2Server >> createAccessToken: grantData [
 	| atokenStr rtokenStr respToken |
 	
-	respToken := AKOAuth2GrantToken new
+	respToken := AKOAuth2GrantAccessToken new
 		expiresIn: grantData accessTokenLifetime;
 		tokenType: 'bearer';
 		scope: grantData scope;
