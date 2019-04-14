@@ -19,7 +19,7 @@ BaselineOfAlkalin >> baseline: spec [
 	spec for: #common do: [
 		
 		self
-			neoJson: spec;
+			"neoJson: spec;"
 			zincComponents: spec;
 			apical: spec;
 			walrus:spec.
