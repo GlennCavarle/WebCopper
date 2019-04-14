@@ -19,8 +19,8 @@ BaselineOfAlkalin >> baseline: spec [
 	spec for: #common do: [
 		
 		self
-			zincComponents: spec;
 			neoJson: spec;
+			zincComponents: spec;
 			apical: spec;
 			walrus:spec.
 		
@@ -156,11 +156,10 @@ BaselineOfAlkalin >> modulePackages: spec [
 
 { #category : #dependencies }
 BaselineOfAlkalin >> neoJson: spec [
-#BaselineOfNeoJSON asPackageIfAbsent: [ 
-	spec 
+spec 
 		baseline: 'NeoJSON' with: [ spec
-		repository: 'github://svenvc/NeoJSON/repository' ]
-]
+		repository: 'github://svenvc/NeoJSON:master/repository' ]
+
 ]
 
 { #category : #groups }
