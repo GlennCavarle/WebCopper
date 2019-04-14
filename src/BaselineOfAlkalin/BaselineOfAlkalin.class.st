@@ -49,7 +49,7 @@ BaselineOfAlkalin >> corePackages: spec [
 		package: #'Alkalin-Core';
 		package: #'Alkalin-EventDispatcher' with: [ spec requires: #(#'Alkalin-Core') ];
 		package: #'Alkalin-Di' with: [ spec requires: #(#'Alkalin-Core') ];
-		package: #'Alkalin-HttpMessage' with: [ spec requires: #(#'Alkalin-Core' #ZincHTTPComponents #NeoJSON) ];
+		package: #'Alkalin-HttpMessage' with: [ spec requires: #(#'Alkalin-Core' #ZincHTTPComponents "#NeoJSON") ];
 		package: #'Alkalin-HttpRouter' with: [ spec requires: #(#'Alkalin-HttpMessage') ];
 		package: #'Alkalin-HttpServer' with: [ spec requires: #(#'Alkalin-HttpMessage') ];
 		package: #'Alkalin-HttpKernel' with: [ spec requires: #(#'Alkalin-Di' #'Alkalin-EventDispatcher' #'Alkalin-HttpRouter') ];
