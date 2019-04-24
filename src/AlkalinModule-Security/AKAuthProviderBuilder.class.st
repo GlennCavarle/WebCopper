@@ -1,5 +1,5 @@
 Class {
-	#name : #AKUserProviderBuilder,
+	#name : #AKAuthProviderBuilder,
 	#superclass : #Object,
 	#instVars : [
 		'providerClass',
@@ -9,7 +9,7 @@ Class {
 }
 
 { #category : #building }
-AKUserProviderBuilder >> buildProvider [
+AKAuthProviderBuilder >> buildProvider [
 	| provider |
 	provider := self providerClass asClass new.
 	self configurationBlock value: provider.
@@ -17,21 +17,21 @@ AKUserProviderBuilder >> buildProvider [
 ]
 
 { #category : #accessing }
-AKUserProviderBuilder >> configurationBlock [
+AKAuthProviderBuilder >> configurationBlock [
 	^ configurationBlock ifNil: [ configurationBlock := [ :p |  ] ]
 ]
 
 { #category : #public }
-AKUserProviderBuilder >> configure: aConfigurationBlock [
+AKAuthProviderBuilder >> configure: aConfigurationBlock [
 	configurationBlock := aConfigurationBlock
 ]
 
 { #category : #accessing }
-AKUserProviderBuilder >> providerClass [
+AKAuthProviderBuilder >> providerClass [
 	^ providerClass ifNil: [ Error signal: 'UserProvider class is required' ]
 ]
 
 { #category : #public }
-AKUserProviderBuilder >> providerClass: anObject [
+AKAuthProviderBuilder >> providerClass: anObject [
 	providerClass := anObject
 ]

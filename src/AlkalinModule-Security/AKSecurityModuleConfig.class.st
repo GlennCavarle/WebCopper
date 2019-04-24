@@ -11,7 +11,7 @@ Class {
 { #category : #adding }
 AKSecurityModuleConfig >> addAuthProvider: aBlock [
 	| providerBuilder |
-	providerBuilder := AKUserProviderBuilder new.
+	providerBuilder := AKAuthProviderBuilder new.
 	aBlock value: providerBuilder.
 	userProviderBuilders add: providerBuilder
 ]

@@ -44,7 +44,7 @@ AKTodoAppConfig >> configureRouter: aRouter [
 AKTodoAppConfig >> configureSecurity: aSecurityConfig [
 	aSecurityConfig
 	
-		addUserProvider:[:upBuilder|upBuilder
+		addAuthProvider:[:apBuilder|apBuilder
 				providerClass: #AKInMemoryUserProvider;
 				configure:[:p|p
 					addUser: (AKUser username: 'John' password: 'password');
