@@ -13,20 +13,20 @@ The Authentication component is based on several concepts allowing the definitio
 ## Standalone usage
 
 ```smalltalk
-authProvider := AKInMemoryUserProvider new
-	addUser: (AKUser username: 'John' password: 'password');
-	addUser: (AKUser username: 'Brenda' password: 'password').
+authProvider := WCInMemoryUserProvider new
+	addUser: (WCUser username: 'John' password: 'password');
+	addUser: (WCUser username: 'Brenda' password: 'password').
 		
-basicAuth := AKBasicAuthenticator new
+basicAuth := WCBasicAuthenticator new
     authProviderManager:
-        (AKAuthProviderManager withProviders: {authProvider});
+        (WCAuthProviderManager withProviders: {authProvider});
     yourself.
 	
-map := AKAuthenticatorMap new
-    map: (AKUrlMatcher fromRegex: '^/admin.*') to: basicAuth;
+map := WCAuthenticatorMap new
+    map: (WCUrlMatcher fromRegex: '^/admin.*') to: basicAuth;
     yourself.
 
-aRequest := AKHttpRequest get: '/admin'.
+aRequest := WCHttpRequest get: '/admin'.
 aRequest setBasicAuthenticationUsername: 'John' password: 'password'.
 
 result := map authenticateRequest: aRequest.

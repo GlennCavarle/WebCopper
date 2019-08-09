@@ -1,4 +1,4 @@
-# The Alkalin Components
+# The WebCopper Components
 
 ## Core components
 * [The EventDispatcher Component](event-dispatcher.md)

@@ -8,7 +8,7 @@
 ```smalltalk
 MyKernelConfig >> modules
     ^ {
-        AKSecurityModule new
+        WCSecurityModule new
     }
 ```
 
@@ -28,12 +28,12 @@ MyKernelConfig >> configureSecurity: aSecurityConfig
 	
     aSecurityConfig
         addUserProvider:[:upBuilder|upBuilder
-            providerClass: #AKInMemoryUserProvider;
+            providerClass: #WCInMemoryUserProvider;
             configure:[:p|p
-                addUser: (AKUser username: 'John' password: 'password');
-                addUser: (AKUser username: 'Brenda' password: 'password')]];
+                addUser: (WCUser username: 'John' password: 'password');
+                addUser: (WCUser username: 'Brenda' password: 'password')]];
 
         addAuthenticator:[ :authBuilder| authBuilder 
             urlRegex: '^/admin.*';
-            authenticatorClass: #AKBasicAuthenticator].
+            authenticatorClass: #WCBasicAuthenticator].
 ```

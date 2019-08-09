@@ -1,3 +1,3 @@
-# Alkalin Documentation
+# WebCopper Documentation
 
 [Summary](SUMMARY.md)

@@ -3,20 +3,20 @@
 
 ## Kernel Events
 
-* **AKKernelRequestEvent :**  
+* **WCKernelRequestEvent :**  
     first event dispatched
-* **AKKernelFilterActionEvent :**  
+* **WCKernelFilterActionEvent :**  
     event dispatched when the event contains an action
-* **AKKernelResponseFromResultEvent :**  
+* **WCKernelResponseFromResultEvent :**  
     event dispatched when the event contains an http response
-* **AKKernelFilterResponseEvent :**    
+* **WCKernelFilterResponseEvent :**    
     event dispatched before returning the response
-* **AKKernelExceptionEvent :**    
+* **WCKernelExceptionEvent :**    
     event dispatched when an exception is raised
 
 ## Kernel Exceptions
 
-* **AKKernelDoesNotReturnResult :**  
+* **WCKernelDoesNotReturnResult :**  
     exception raised when an action does ot return a result
-* **AKKernelDoesNotReturnHttpResponse :**  
+* **WCKernelDoesNotReturnHttpResponse :**  
     exception raised at the end, when no http response is returned 

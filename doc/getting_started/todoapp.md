@@ -5,8 +5,8 @@
 ```smalltalk
 
 Metacello new
-    baseline: 'Alkalin';
-    repository: 'github://GlennCavarle/Alkalin/src';
+    baseline: 'WebCopper';
+    repository: 'github://GlennCavarle/WebCopper/src';
     load: #('Core' 'SecurityModule').
 
 ```
@@ -38,12 +38,12 @@ TodoApp class >> defaultConfiguration
 ```smalltalk
 TodoAppConfig >> extensions
     ^ {
-        AKRegisterTaggedListenersExtension new
+        WCRegisterTaggedListenersExtension new
     }
 
 TodoAppConfig >> modules
     ^ {
-        AKSecurityModule new
+        WCSecurityModule new
     }
 ```
 
@@ -55,9 +55,9 @@ TodoAppConfig >> configureServiceContainer: container
     container
         addDefinition:[:def| def
             identifier: #TodoCtrl;
-            targetClass: #AKTodoController;
+            targetClass: #WCTodoController;
             methodCall: #repository: 
-                withArgs: {#TodoRepo asAKServiceRef} ];
+                withArgs: {#TodoRepo asWCServiceRef} ];
             
         addDefinition:[:def| def
             identifier: #TodoRepo;
@@ -65,10 +65,10 @@ TodoAppConfig >> configureServiceContainer: container
         
         addDefinition:[:def| def
             identifier: #ActionResolverSubscriber;
-            targetClass: #AKActionResolverSubscriber;
+            targetClass: #WCActionResolverSubscriber;
             constructor: #serviceContainer: 
-                withArgs: {#ServiceContainer asAKServiceRef};
-            tag: (AKDiTag name:#eventSubscriber)]
+                withArgs: {#ServiceContainer asWCServiceRef};
+            tag: (WCDiTag name:#eventSubscriber)]
         
         
 ```
@@ -81,27 +81,27 @@ TodoAppConfig >> configureRouter: aRouter
         addRoute: [ :rb | rb
                 name: #todo_get_list;
                 method: #GET path: '/todos';
-                callAction: #doGetList: on: #TodoCtrl asAKServiceRef ];
+                callAction: #doGetList: on: #TodoCtrl asWCServiceRef ];
             
         addRoute: [ :rb | rb
                 name: #todo_get_one ;
                 method: #GET path: '/todos/:id(any)';
-                callAction: #doGetOne: on: #TodoCtrl asAKServiceRef  ];
+                callAction: #doGetOne: on: #TodoCtrl asWCServiceRef  ];
             
         addRoute: [ :rb | rb
                 name: #todo_create ;
                 method: #POST path: '/todos';
-                callAction: #doCreate: on: #TodoCtrl asAKServiceRef];
+                callAction: #doCreate: on: #TodoCtrl asWCServiceRef];
 
         addRoute: [ :rb | rb
                 name: #todo_delete ;
                 method: #DELETE path: '/todos/:id(any)';
-                callAction: #doDelete: on: #TodoCtrl asAKServiceRef ];
+                callAction: #doDelete: on: #TodoCtrl asWCServiceRef ];
             
         addRoute: [ :rb | rb
                 name: #todo_delete_all ;
                 method: #DELETE path: '/todos';
-                callAction: #doDeleteAll: on: #TodoCtrl asAKServiceRef ]
+                callAction: #doDeleteAll: on: #TodoCtrl asWCServiceRef ]
 ```
 
 ### Configure the security module
@@ -110,14 +110,14 @@ TodoAppConfig >> configureRouter: aRouter
 TodoAppConfig >> configureSecurity: aSecurityConfig
     aSecurityConfig
         addUserProvider:[:upBuilder|upBuilder
-            providerClass: #AKInMemoryUserProvider;
+            providerClass: #WCInMemoryUserProvider;
             configure:[:p|p
-                addUser: (AKUser username: 'John' password: 'password');
-                addUser: (AKUser username: 'Brenda' password: 'password')]];
+                addUser: (WCUser username: 'John' password: 'password');
+                addUser: (WCUser username: 'Brenda' password: 'password')]];
         
         addAuthenticator:[ :authBuilder| authBuilder 
             urlRegex: '^/todos/.*';
-            authenticatorClass: #AKBasicAuthenticator].
+            authenticatorClass: #WCBasicAuthenticator].
 ```
 
 ### TodoController class
@@ -126,20 +126,20 @@ TodoAppConfig >> configureSecurity: aSecurityConfig
 TodoController >> doGetList: aRequest
     |list|
     list := self repository selectAll.
-    ^ AKJsonResponse code: 200 data: list
+    ^ WCJsonResponse code: 200 data: list
 
 TodoController >> doGetOne: aRequest
     | id model |
     id := aRequest paramAt: #id.
     model := self repository selectById: id.
-    ^ AKJsonResponse code: 200 data: model
+    ^ WCJsonResponse code: 200 data: model
 
 TodoController >> doCreate: aRequest
     | newModel text |
     text := aRequest bodyAt: #text.
     newModel := Todo withId: UUID new text: text.
     self repository add: newModel.
-    ^ AKJsonResponse code: 200 data: newModel
+    ^ WCJsonResponse code: 200 data: newModel
 
 TodoController >> doUpdate: aRequest
     |id data model |
@@ -147,14 +147,14 @@ TodoController >> doUpdate: aRequest
     data := aRequest body.
     model := self repository selectById: id.
     model text: (data at:#text).
-    ^ AKJsonResponse code: 200 data: model 
+    ^ WCJsonResponse code: 200 data: model 
 
 TodoController >> doDelete: aRequest
     |id|
     id := (aRequest paramAt:#id).
     self repository removeById: id.
 
-    ^ AKJsonResponse 
+    ^ WCJsonResponse 
         code: 200 
         data: {#message -> 'deletion done'} asDictionary
 ```
@@ -162,7 +162,7 @@ TodoController >> doDelete: aRequest
 ### Run the TodoApp
 
 ```smalltalk
-AKHttpServer on
+WCHttpServer on
     port: 8080;
     registerDefault: TodoApp new;
     start.

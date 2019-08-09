@@ -8,7 +8,7 @@
 ```smalltalk
 MyKernelConfig >> modules
     ^ {
-        AKWalrusModule new
+        WCWalrusModule new
     }
 ```
 

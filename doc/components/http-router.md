@@ -6,19 +6,19 @@ The HttpRouter maps http requests to actions.
 
 ```smalltalk
 
-rc := AKRouteCollection new.
+rc := WCRouteCollection new.
 
 rc addRoute:[:rb| rb
     path:'/route/:arg';
     method: #GET;
     action:[ :req| "do something"]].
 
-request := AKHttpRequest get:'/route/foo'.
+request := WCHttpRequest get:'/route/foo'.
 
 "check if a matching route exists"
 rc matchRequest: request.
 
-"retrieve the matching AKRoute instance"
+"retrieve the matching WCRoute instance"
 route := rc routeForRequest: request.
 
 "and execute the route's action"
